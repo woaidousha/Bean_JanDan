@@ -29,7 +29,8 @@ public abstract class BaseColorActivity extends ActionBarActivity {
         super.setContentView(layoutResID);
         View contentView = findViewById(android.R.id.content);
         contentView.setPadding(contentView.getPaddingLeft(), contentView.getPaddingTop() + mTintManager.getConfig()
-                .getPixelInsetTop(true), contentView.getPaddingRight(), contentView.getPaddingBottom());
+                .getStatusBarHeight() +
+                mTintManager.getConfig().getActionBarHeight(), contentView.getPaddingRight(), contentView.getPaddingBottom());
         View actionbar = findViewById(R.id.action_bar_container);
         actionbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_color));
     }

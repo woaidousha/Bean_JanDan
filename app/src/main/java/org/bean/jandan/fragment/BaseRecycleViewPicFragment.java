@@ -62,6 +62,7 @@ public abstract class BaseRecycleViewPicFragment extends BaseNetFragment<Picture
         mPage = new Page();
         mAdapter = new PictureAdapter();
         mRecycleView.setAdapter(mAdapter);
+        load(true);
     }
 
     @Override
@@ -72,6 +73,7 @@ public abstract class BaseRecycleViewPicFragment extends BaseNetFragment<Picture
         } else {
             url = mPage.firstPage(url());
         }
+        mSwipeRefreshLayout.setRefreshing(true);
         return request(buildRequest(url), this);
     }
 
