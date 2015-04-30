@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="status_bar_color">#cc08b5d0</drawable>
+    <drawable name="action_bar_color">#ff08b5d0</drawable>
+</resources>
