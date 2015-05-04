@@ -80,6 +80,7 @@ public class ImageProgressBarDrawable extends Drawable implements Animatable, Ru
 
         mBlockHeight = height / 10;
         mBlockWidth = mSpace = width / 30;
+        mBlockHeight = mBlockWidth = mSpace = Math.min(mBlockHeight, mBlockWidth);
         initBlocks();
     }
 
