@@ -6,6 +6,8 @@ import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
+import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 
 import org.bean.jandan.common.C;
 import org.bean.jandan.common.util.DebugLog;
@@ -25,6 +27,7 @@ public class BeanApp extends Application {
     }
 
     public void initFresco() {
+        ProgressiveJpegConfig jpegConfig = new SimpleProgressiveJpegConfig();
         ImagePipelineConfig.Builder configBuilder = ImagePipelineConfig.newBuilder(this);
         DiskCacheConfig.Builder diskCacheConfig = DiskCacheConfig.newBuilder();
         diskCacheConfig.setBaseDirectoryPathSupplier(new
@@ -39,7 +42,8 @@ public class BeanApp extends Application {
         .setMaxCacheSizeOnLowDiskSpace(C.DISK_CACHE.MAX_CACHE_SIZE_ON_LOW_DISK_SPACE)
         .setMaxCacheSizeOnVeryLowDiskSpace(C.DISK_CACHE.MAX_CACHE_SIZE_ON_VERY_LOW_DISK_SPACE);
         configBuilder.setMainDiskCacheConfig(diskCacheConfig.build());
-        configBuilder.setMainDiskCacheConfig(diskCacheConfig.build());
+        configBuilder.setProgressiveJpegConfig(jpegConfig);
+
         Fresco.initialize(this, configBuilder.build());
     }
 }

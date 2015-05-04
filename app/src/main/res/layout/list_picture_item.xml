@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/date"
             android:layout_below="@+id/author"
-            android:background="@color/image_view_default_background"/>
+            android:background="@color/image_view_default_background"
+            app:actualImageScaleType="centerInside"/>
 
     </RelativeLayout>
 

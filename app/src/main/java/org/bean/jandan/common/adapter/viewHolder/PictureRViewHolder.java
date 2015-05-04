@@ -8,6 +8,8 @@ import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import org.bean.jandan.R;
 import org.bean.jandan.model.SinglePicture;
@@ -44,8 +46,13 @@ public class PictureRViewHolder extends RViewHolder {
         mOO.setText(picture.getVote_positive());
         mXX.setText(picture.getVote_negative());
         ImageProgressBarDrawable drawable;
-        DraweeController controller = Fresco.newDraweeControllerBuilder().setUri(picture.getPicUri()).setAutoPlayAnimations(true)
-                    .setCallerContext(mPicture.getHierarchy()).build();
+        ImageRequest request = ImageRequestBuilder
+                .newBuilderWithSource(picture.getPicUri())
+                .setProgressiveRenderingEnabled(true)
+                .build();
+        DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request)
+                .setAutoPlayAnimations(true)
+                .setCallerContext(mPicture.getHierarchy()).build();
         mPicture.setController(controller);
         if (mPicture.getHierarchy() != null) {
             drawable = new ImageProgressBarDrawable(mResources);
