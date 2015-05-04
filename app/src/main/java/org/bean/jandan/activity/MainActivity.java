@@ -1,5 +1,6 @@
 package org.bean.jandan.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,24 +21,36 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
 
     private DrawerLayout mDrawerLayout;
     private ListView mListView;
-    private FrameLayout mFragmentContainer;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
-        initMenu();
     }
 
     private void findViews() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        mFragmentContainer = (FrameLayout) findViewById(R.id.fragment_container);
-        mDrawerLayout.setScrimColor(0x00000000);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, null, R.string.app_name, R.string.app_name);
-        toggle.syncState();
+        mDrawerLayout.setScrimColor(getResources().getColor(R.color.drawer_layout_scrim_color));
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolbar(), R.string.app_name,
+                R.string.app_name);
+        mDrawerLayout.setDrawerListener(mToggle);
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mToggle.syncState();
+        initMenu();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -61,7 +73,7 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
     private void initMenu() {
         MenuAdapter adapter = new MenuAdapter();
         mListView.setAdapter(adapter);
-        mListView.performItemClick(mListView, 0, 0);
+        mListView.performItemClick(mListView.getChildAt(0), 0, 0);
     }
 
     @Override
@@ -71,6 +83,7 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
         transaction.replace(R.id.fragment_container, menu.getFragment());
         transaction.commit();
         mDrawerLayout.closeDrawers();
+        getToolbar().setTitle(menu.mLabelRes);
     }
 
     class MenuAdapter extends BaseAdapter {

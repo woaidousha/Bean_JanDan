@@ -2,4 +2,6 @@
 <resources>
     <drawable name="status_bar_color">#cc08b5d0</drawable>
     <drawable name="action_bar_color">#ff08b5d0</drawable>
+
+    <color name="drawer_layout_scrim_color">#00000000</color>
 </resources>
