@@ -4,4 +4,21 @@
     <drawable name="action_bar_color">#ff08b5d0</drawable>
 
     <color name="drawer_layout_scrim_color">#00000000</color>
+
+    <color name="loading_draw_color">#fffdf237</color>
+    <color name="image_view_default_background">#ff999999</color>
+
+    <color name="rainbow_red">#bf0c43</color>
+    <color name="rainbow_yellow">#f9ba15</color>
+    <color name="rainbow_green">#8eac00</color>
+    <color name="rainbow_blue">#127a97</color>
+    <color name="rainbow_purple">#452b72</color>
+
+    <integer-array name="rainbow">
+        <item>@color/rainbow_red</item>
+        <item>@color/rainbow_yellow</item>
+        <item>@color/rainbow_green</item>
+        <item>@color/rainbow_blue</item>
+        <item>@color/rainbow_purple</item>
+    </integer-array>
 </resources>

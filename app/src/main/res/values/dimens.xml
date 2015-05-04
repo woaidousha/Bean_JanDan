@@ -9,4 +9,6 @@
     <dimen name="list_item_widget_margin">10dp</dimen>
     
     <dimen name="menu_item_height">35dp</dimen>
+
+    <dimen name="loading_image_progress_text_size">18sp</dimen>
 </resources>

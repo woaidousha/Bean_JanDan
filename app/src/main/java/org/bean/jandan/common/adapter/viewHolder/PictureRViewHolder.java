@@ -4,11 +4,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
 import org.bean.jandan.model.SinglePicture;
+import org.bean.jandan.widget.drawable.ImageProgressBarDrawable;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
@@ -40,8 +43,17 @@ public class PictureRViewHolder extends RViewHolder {
         mDate.setText(picture.getComment_date());
         mOO.setText(picture.getVote_positive());
         mXX.setText(picture.getVote_negative());
+        ImageProgressBarDrawable drawable;
         DraweeController controller = Fresco.newDraweeControllerBuilder().setUri(picture.getPicUri()).setAutoPlayAnimations(true)
-                .build();
+                    .setCallerContext(mPicture.getHierarchy()).build();
         mPicture.setController(controller);
+        if (mPicture.getHierarchy() != null) {
+            drawable = new ImageProgressBarDrawable(mResources);
+            GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(mResources)
+                    .setFadeDuration(300)
+                    .setProgressBarImage(drawable)
+                    .build();
+            mPicture.setHierarchy(hierarchy);
+        }
     }
 }
