@@ -1,6 +1,8 @@
 package org.bean.jandan.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -10,14 +12,24 @@ import android.widget.FrameLayout;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.bean.jandan.R;
+import org.bean.jandan.widget.OnDoubleClickListener;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public abstract class BaseColorActivity extends ActionBarActivity {
+public abstract class BaseColorActivity extends ActionBarActivity implements View.OnClickListener, OnDoubleClickListener {
 
     SystemBarTintManager mTintManager;
     private Toolbar mToolbar;
+
+    private Handler mDualClickHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int what = msg.what;
+            View v = findViewById(what);
+            v.performClick();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,7 @@ public abstract class BaseColorActivity extends ActionBarActivity {
                 .getStatusBarHeight(), contentView.getPaddingRight(), contentView.getPaddingBottom());
         mToolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         mToolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_color));
+        mToolbar.setOnClickListener(this);
         setSupportActionBar(mToolbar);
     }
 
@@ -45,4 +58,14 @@ public abstract class BaseColorActivity extends ActionBarActivity {
         return mToolbar;
     }
 
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+        if (mDualClickHandler.hasMessages(viewId)) {
+            mDualClickHandler.removeMessages(viewId);
+            onDoubleClick(v);
+        } else {
+            mDualClickHandler.sendEmptyMessageDelayed(viewId, 1000);
+        }
+    }
 }

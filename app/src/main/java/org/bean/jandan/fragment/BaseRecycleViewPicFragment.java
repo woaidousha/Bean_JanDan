@@ -77,6 +77,10 @@ public abstract class BaseRecycleViewPicFragment extends BaseNetFragment<Picture
         return request(buildRequest(url), this);
     }
 
+    public void goToTop() {
+        mRecycleView.smoothScrollToPosition(0);
+    }
+
     @Override
     protected Request buildRequest(String url) {
         if (TextUtils.isEmpty(url)) {

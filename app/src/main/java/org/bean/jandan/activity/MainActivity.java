@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.bean.jandan.R;
+import org.bean.jandan.fragment.BaseRecycleViewPicFragment;
 
 public class MainActivity extends BaseColorActivity implements AdapterView.OnItemClickListener {
 
@@ -84,6 +85,15 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
         transaction.commit();
         mDrawerLayout.closeDrawers();
         getToolbar().setTitle(menu.mLabelRes);
+    }
+
+    @Override
+    public void onDoubleClick(View v) {
+        int viewId = v.getId();
+        if (viewId == R.id.main_tool_bar) {
+            BaseRecycleViewPicFragment fragment = (BaseRecycleViewPicFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            fragment.goToTop();
+        }
     }
 
     class MenuAdapter extends BaseAdapter {
