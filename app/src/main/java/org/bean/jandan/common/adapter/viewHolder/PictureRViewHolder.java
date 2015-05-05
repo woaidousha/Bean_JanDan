@@ -53,14 +53,15 @@ public class PictureRViewHolder extends RViewHolder {
         mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mCommentContent.setText(commentContent);
         ImageProgressBarDrawable drawable;
-        ImageRequest request = ImageRequestBuilder
-                .newBuilderWithSource(picture.getPicUri())
-                .setProgressiveRenderingEnabled(true)
-                .build();
-        DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request)
-                .setAutoPlayAnimations(true)
-                .setOldController(mPicture.getController())
-                .setCallerContext(mPicture.getHierarchy()).build();
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(picture.getPicUri())
+                                                  .setProgressiveRenderingEnabled(true)
+                                                  .build();
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                                            .setImageRequest(request)
+                                            .setAutoPlayAnimations(true)
+                                            .setOldController(mPicture.getController())
+                                            .setCallerContext(mPicture.getHierarchy())
+                                            .build();
         mPicture.setController(controller);
         if (mPicture.getHierarchy() != null) {
             drawable = new ImageProgressBarDrawable(mResources);
