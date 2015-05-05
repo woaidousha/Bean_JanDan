@@ -87,7 +87,7 @@ public abstract class BaseRecycleViewPicFragment extends BaseNetFragment<Picture
             return null;
         }
         Request.Builder builder = new Request.Builder();
-        return builder.url(url).tag(mPage.isFirstPage()).build();
+        return builder.url(url).tag(mPage.isFirstPage(url)).build();
     }
 
     @Override

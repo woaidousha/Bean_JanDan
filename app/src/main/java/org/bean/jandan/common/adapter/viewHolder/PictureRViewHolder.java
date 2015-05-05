@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -52,6 +53,7 @@ public class PictureRViewHolder extends RViewHolder {
                 .build();
         DraweeController controller = Fresco.newDraweeControllerBuilder().setImageRequest(request)
                 .setAutoPlayAnimations(true)
+                .setOldController(mPicture.getController())
                 .setCallerContext(mPicture.getHierarchy()).build();
         mPicture.setController(controller);
         if (mPicture.getHierarchy() != null) {
@@ -59,6 +61,7 @@ public class PictureRViewHolder extends RViewHolder {
             GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(mResources)
                     .setFadeDuration(300)
                     .setProgressBarImage(drawable)
+                    .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
                     .build();
             mPicture.setHierarchy(hierarchy);
         }

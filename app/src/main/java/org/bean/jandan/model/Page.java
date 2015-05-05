@@ -2,6 +2,13 @@ package org.bean.jandan.model;
 
 import android.text.TextUtils;
 
+import org.bean.jandan.common.C;
+import org.bean.jandan.common.util.DebugLog;
+import org.bean.jandan.common.util.URLUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
  */
@@ -48,35 +55,39 @@ public class Page {
         return ++currentPage;
     }
 
-    private int first() {
-        return currentPage = 1;
-    }
-
     public String nextPage(String baseUrl) {
         if (currentPage == totalPage) {
             return null;
         }
         next();
-        return pageUrl(baseUrl);
+        return pageUrl(baseUrl, getCurrentPage());
     }
 
     public String firstPage(String baseUrl) {
-        first();
-        return pageUrl(baseUrl);
+        return pageUrl(baseUrl, C.URL.FIRST_PAGE);
     }
 
-    private String pageUrl(String baseUrl) {
+    private String pageUrl(String baseUrl, int page) {
         if (TextUtils.isEmpty(baseUrl)) {
             return null;
         }
         StringBuilder builder = new StringBuilder(baseUrl);
         builder.append("&");
-        builder.append("page=");
-        builder.append(getCurrentPage());
+        builder.append(C.URL.PARAM_PAGE);
+        builder.append("=");
+        builder.append(page);
+        DebugLog.d("url : " + builder.toString());
         return builder.toString();
     }
 
-    public boolean isFirstPage() {
-        return currentPage == 1;
+    public boolean isFirstPage(String url) {
+        Map<String, String> values = new HashMap<>();
+        URLUtil.decode(url, values);
+        try {
+            int page = Integer.parseInt(values.get(C.URL.PARAM_PAGE));
+            return page == C.URL.FIRST_PAGE;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

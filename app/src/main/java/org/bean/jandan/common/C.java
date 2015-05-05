@@ -3,12 +3,15 @@ package org.bean.jandan.common;
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
  */
-public class C {
+public interface C {
 
-    public static class URL {
+    public static interface URL {
         /*无聊图*/
         public static final String PIC = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments";
         public static final String OOXX = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments";
+
+        public static final int FIRST_PAGE = 1;
+        public static final String PARAM_PAGE = "page";
     }
 
     public static interface UNIT {

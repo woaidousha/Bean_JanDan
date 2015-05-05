@@ -6,7 +6,7 @@
     android:layout_height="@dimen/pic_list_item_height"
     android:layout_margin="5dp"
     android:orientation="vertical"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="0dp"
     app:contentPadding="5dp">
 
     <RelativeLayout
