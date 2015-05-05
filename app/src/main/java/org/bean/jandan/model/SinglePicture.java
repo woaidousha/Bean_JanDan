@@ -3,6 +3,8 @@ package org.bean.jandan.model;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import org.bean.jandan.common.util.StringUtil;
+
 /**
  * Created by liuyulong@yixin.im on 2015/4/29.
  */
@@ -124,7 +126,7 @@ public class SinglePicture {
     }
 
     public String getText_content() {
-        return text_content;
+        return StringUtil.replaceBlank(text_content);
     }
 
     public String getPic() {

@@ -16,16 +16,28 @@
 
         <TextView
             android:id="@+id/author"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            style="@style/Base.TextAppearance.AppCompat.Body1"/>
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/list_item_widget_margin"
+            android:layout_toRightOf="@id/author"
+            android:layout_alignBaseline="@id/author"
+            style="@style/Base.TextAppearance.AppCompat.Small"/>
+
+        <TextView
+            android:id="@+id/comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author"
+            android:layout_alignParentLeft="true"
+            style="@style/Base.TextAppearance.AppCompat.Small"/>
 
         <TextView
             android:id="@+id/oo"
@@ -33,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="@dimen/list_item_widget_margin"/>
+            android:layout_marginLeft="@dimen/list_item_widget_margin"
+            style="@style/Base.TextAppearance.AppCompat.Small"/>
 
         <TextView
             android:id="@+id/xx"
@@ -41,14 +54,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/list_item_widget_margin"
-            android:layout_toLeftOf="@id/oo"/>
+            android:layout_toLeftOf="@id/oo"
+            style="@style/Base.TextAppearance.AppCompat.Small"/>
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/date"
-            android:layout_below="@+id/author"
+            android:layout_above="@id/oo"
+            android:layout_below="@id/comment_content"
             android:background="@color/image_view_default_background"
             app:actualImageScaleType="centerInside"/>
 

@@ -1,5 +1,6 @@
 package org.bean.jandan.common.adapter.viewHolder;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class PictureRViewHolder extends RViewHolder {
     private TextView mDate;
     private TextView mOO;
     private TextView mXX;
+    private TextView mCommentContent;
 
     public PictureRViewHolder(View mView) {
         super(mView);
@@ -38,6 +40,7 @@ public class PictureRViewHolder extends RViewHolder {
         mDate = (TextView) view.findViewById(R.id.date);
         mOO = (TextView) view.findViewById(R.id.oo);
         mXX = (TextView) view.findViewById(R.id.xx);
+        mCommentContent = (TextView) view.findViewById(R.id.comment_content);
     }
 
     public void refresh(Object item) {
@@ -46,6 +49,9 @@ public class PictureRViewHolder extends RViewHolder {
         mDate.setText(picture.getComment_date());
         mOO.setText(picture.getVote_positive());
         mXX.setText(picture.getVote_negative());
+        String commentContent = picture.getText_content();
+        mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
+        mCommentContent.setText(commentContent);
         ImageProgressBarDrawable drawable;
         ImageRequest request = ImageRequestBuilder
                 .newBuilderWithSource(picture.getPicUri())
