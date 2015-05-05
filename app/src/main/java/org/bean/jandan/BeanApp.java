@@ -11,6 +11,7 @@ import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 
 import org.bean.jandan.common.C;
 import org.bean.jandan.common.util.DebugLog;
+import org.bean.jandan.common.util.StorageUtil;
 
 import java.io.File;
 
@@ -19,11 +20,19 @@ import java.io.File;
  */
 public class BeanApp extends Application {
 
+    private static BeanApp sInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
         DebugLog.d(BeanApp.this.getExternalCacheDir().getAbsolutePath());
         initFresco();
+        StorageUtil.init();
+    }
+
+    public static BeanApp getApp() {
+        return sInstance;
     }
 
     public void initFresco() {

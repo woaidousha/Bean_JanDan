@@ -23,6 +23,7 @@ public class HttpUtil {
 
     public static void enqueue(Request request, Callback callback) {
         DebugLog.d("request url : " + request.urlString());
-        client().newCall(request).enqueue(callback);
+        client().newCall(request)
+                .enqueue(callback);
     }
 }

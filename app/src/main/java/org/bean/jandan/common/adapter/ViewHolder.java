@@ -10,7 +10,7 @@ import org.bean.jandan.common.adapter.viewHolder.IViewHolder;
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
  */
-public abstract class ViewHolder implements IScrollStateListener, IViewHolder{
+public abstract class ViewHolder implements IScrollStateListener, IViewHolder {
 
     private Context mContext;
     private Fragment mFragment;

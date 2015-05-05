@@ -18,4 +18,8 @@ public class StringUtil {
         return dest;
     }
 
+
+    public static String makeMd5(String source) {
+        return MD5.getStringMD5(source);
+    }
 }

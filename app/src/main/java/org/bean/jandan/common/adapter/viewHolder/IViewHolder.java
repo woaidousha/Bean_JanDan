@@ -7,5 +7,6 @@ import android.view.View;
  */
 public interface IViewHolder {
     public void inflate(View view);
+
     public void refresh(Object item);
 }

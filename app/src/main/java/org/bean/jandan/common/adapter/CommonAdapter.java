@@ -107,7 +107,7 @@ public class CommonAdapter extends BaseAdapter implements IViewReclaimer {
             return 0;
         }
 
-        Class<?> clazz  = mDelegate.viewHolderAtPosition(position);
+        Class<?> clazz = mDelegate.viewHolderAtPosition(position);
         if (mViewTypes.containsKey(clazz)) {
             return mViewTypes.get(clazz);
         } else {

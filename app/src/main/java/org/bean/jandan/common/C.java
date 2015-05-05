@@ -24,4 +24,27 @@ public interface C {
         public static final int MAX_CACHE_SIZE_ON_LOW_DISK_SPACE = 100 * UNIT.MB;
         public static final int MAX_CACHE_SIZE_ON_VERY_LOW_DISK_SPACE = 50 * UNIT.MB;
     }
+
+    public static enum Directory {
+
+        SHARE("share", false);
+
+        public static final String APP_DIRECTORY_NAME = "BeanJD";
+
+        String path;
+        boolean storageByMD5;
+
+        Directory(String path, boolean storageByMD5) {
+            this.path = path;
+            this.storageByMD5 = storageByMD5;
+        }
+
+        public String getStoragePath() {
+            return "/" + path + "/";
+        }
+
+        public boolean isStorageByMD5() {
+            return storageByMD5;
+        }
+    }
 }

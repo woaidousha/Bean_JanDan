@@ -9,6 +9,8 @@ import org.bean.jandan.model.Result;
  */
 public interface OnResultCallback {
     public void onFinish();
+
     public void onFailed();
+
     public void onSuccess(Result result, Response response);
 }

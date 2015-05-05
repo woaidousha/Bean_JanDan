@@ -12,7 +12,7 @@ public class DebugLog {
     static String methodName;
     static int lineNumber;
 
-    private DebugLog(){
+    private DebugLog() {
         /* Protect from instantiations */
     }
 
@@ -24,7 +24,7 @@ public class DebugLog {
         return !isDebuggable();
     }
 
-    private static String createLog( String log ) {
+    private static String createLog(String log) {
 
         StringBuffer buffer = new StringBuffer();
         buffer.append("[");
@@ -37,13 +37,13 @@ public class DebugLog {
         return buffer.toString();
     }
 
-    private static void getMethodNames(StackTraceElement[] sElements){
+    private static void getMethodNames(StackTraceElement[] sElements) {
         className = sElements[1].getFileName();
         methodName = sElements[1].getMethodName();
         lineNumber = sElements[1].getLineNumber();
     }
 
-    public static void e(String message){
+    public static void e(String message) {
         if (!isDebuggable())
             return;
 
@@ -52,7 +52,7 @@ public class DebugLog {
         Log.e(className, createLog(message));
     }
 
-    public static void i(String message){
+    public static void i(String message) {
         if (!isDebuggable())
             return;
 
@@ -60,7 +60,7 @@ public class DebugLog {
         Log.i(className, createLog(message));
     }
 
-    public static void d(String message){
+    public static void d(String message) {
         if (!isDebuggable())
             return;
 
@@ -68,7 +68,7 @@ public class DebugLog {
         Log.d(className, createLog(message));
     }
 
-    public static void v(String message){
+    public static void v(String message) {
         if (!isDebuggable())
             return;
 
@@ -76,7 +76,7 @@ public class DebugLog {
         Log.v(className, createLog(message));
     }
 
-    public static void w(String message){
+    public static void w(String message) {
         if (!isDebuggable())
             return;
 
@@ -84,7 +84,7 @@ public class DebugLog {
         Log.w(className, createLog(message));
     }
 
-    public static void wtf(String message){
+    public static void wtf(String message) {
         if (!isDebuggable())
             return;
 

@@ -23,6 +23,6 @@ public class ColorUtil {
         B = B.length() < 2 ? ('0' + B) : B;
         String G = Integer.toHexString(Color.green(color));
         G = G.length() < 2 ? ('0' + G) : G;
-        return '#'+ A + R + B + G;
+        return '#' + A + R + B + G;
     }
 }
