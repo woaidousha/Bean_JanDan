@@ -16,6 +16,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import org.bean.jandan.BeanApp;
+import org.bean.jandan.R;
 import org.bean.jandan.common.C;
 
 import java.io.File;
@@ -40,9 +41,8 @@ public class ShareUtil {
                 File file = new File(path);
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
                 intent.setType("image/jpeg");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                BeanApp.getApp()
-                       .startActivity(intent);
+                String title = BeanApp.getApp().getString(R.string.button_text_share);
+                BeanApp.getApp().startActivity(Intent.createChooser(intent,title).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
 
             @Override
