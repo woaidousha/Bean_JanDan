@@ -22,7 +22,7 @@ public class StorageUtil {
     }
 
     private static void loadStorageState() {
-        //������ô洢�Ƿ��Ѿ�mount
+        //检查外置存储是否已经mount
         sMounted = Environment.getExternalStorageState()
                               .equals(Environment.MEDIA_MOUNTED);
         if (sMounted) {
@@ -37,9 +37,9 @@ public class StorageUtil {
             sExternalStorageDir = null;
             sFolderReady = false;
         }
-        //��ȡ���ô洢·��
+        //获取外置存储路径
 
-        //����������ļ���
+        //创建所需的文件夹
     }
 
     public static boolean isExternalStorageExist() {
@@ -68,7 +68,7 @@ public class StorageUtil {
     }
 
     /**
-     * ����Ŀ¼
+     * 创建目录
      *
      * @param path
      * @return
@@ -139,7 +139,7 @@ public class StorageUtil {
     }
 
     /**
-     * ����ָ�����͵��ļ���·��
+     * 返回指定类型的文件夹路径
      *
      * @param directory
      * @return

@@ -7,6 +7,9 @@ package org.bean.jandan.common.util;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import com.facebook.imagepipeline.memory.PooledByteBuffer;
+import com.facebook.imagepipeline.memory.PooledByteBufferInputStream;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +22,7 @@ import java.nio.channels.FileChannel;
 
 
 /**
- * ÓÃÓÚ°Ñ¸½¼ş±£´æµ½ÎÄ¼şÏµÍ³ÖĞ
+ * ç”¨äºæŠŠé™„ä»¶ä¿å­˜åˆ°æ–‡ä»¶ç³»ç»Ÿä¸­
  */
 public class AttachmentStore {
     public static long copy(String srcPath, String dstPath) {
@@ -86,11 +89,11 @@ public class AttachmentStore {
     }
 
     /**
-     * °ÑÊı¾İ±£´æµ½ÎÄ¼şÏµÍ³ÖĞ£¬²¢ÇÒ·µ»ØÆä´óĞ¡
+     * æŠŠæ•°æ®ä¿å­˜åˆ°æ–‡ä»¶ç³»ç»Ÿä¸­ï¼Œå¹¶ä¸”è¿”å›å…¶å¤§å°
      *
      * @param data
      * @param filePath
-     * @return Èç¹û±£´æÊ§°Ü, Ôò·µ»Ø-1
+     * @return å¦‚æœä¿å­˜å¤±è´¥, åˆ™è¿”å›-1
      */
     public static long save(byte[] data, String filePath) {
         if (TextUtils.isEmpty(filePath)) {
@@ -103,7 +106,7 @@ public class AttachmentStore {
         }
 
         if (!f.getParentFile()
-              .exists()) {// Èç¹û²»´æÔÚÉÏ¼¶ÎÄ¼ş¼Ğ
+              .exists()) {// å¦‚æœä¸å­˜åœ¨ä¸Šçº§æ–‡ä»¶å¤¹
             f.getParentFile()
              .mkdirs();
         }
@@ -135,7 +138,7 @@ public class AttachmentStore {
         }
 
         if (!dstFile.getParentFile()
-                    .exists()) {// Èç¹û²»´æÔÚÉÏ¼¶ÎÄ¼ş¼Ğ
+                    .exists()) {// å¦‚æœä¸å­˜åœ¨ä¸Šçº§æ–‡ä»¶å¤¹
             dstFile.getParentFile()
                    .mkdirs();
         }
@@ -150,7 +153,7 @@ public class AttachmentStore {
 
         File f = new File(filePath);
         if (!f.getParentFile()
-              .exists()) {// Èç¹û²»´æÔÚÉÏ¼¶ÎÄ¼ş¼Ğ
+              .exists()) {// å¦‚æœä¸å­˜åœ¨ä¸Šçº§æ–‡ä»¶å¤¹
             f.getParentFile()
              .mkdirs();
         }
@@ -168,12 +171,12 @@ public class AttachmentStore {
     /**
      * @param is
      * @param filePath
-     * @return ±£´æÊ§°Ü£¬·µ»Ø-1
+     * @return ä¿å­˜å¤±è´¥ï¼Œè¿”å›-1
      */
     public static long save(InputStream is, String filePath) {
         File f = new File(filePath);
         if (!f.getParentFile()
-              .exists()) {// Èç¹û²»´æÔÚÉÏ¼¶ÎÄ¼ş¼Ğ
+              .exists()) {// å¦‚æœä¸å­˜åœ¨ä¸Šçº§æ–‡ä»¶å¤¹
             f.getParentFile()
              .mkdirs();
         }
@@ -211,17 +214,17 @@ public class AttachmentStore {
     }
 
     /**
-     * °ÑÎÄ¼ş´ÓÎÄ¼şÏµÍ³ÖĞ¶ÁÈ¡³öÀ´
+     * æŠŠæ–‡ä»¶ä»æ–‡ä»¶ç³»ç»Ÿä¸­è¯»å–å‡ºæ¥
      *
      * @param path
-     * @return Èç¹ûÎŞ·¨¶ÁÈ¡, Ôò·µ»Ønull
+     * @return å¦‚æœæ— æ³•è¯»å–, åˆ™è¿”å›null
      */
     public static byte[] load(String path) {
         try {
             File f = new File(path);
             int unread = (int) f.length();
             int read = 0;
-            byte[] buf = new byte[unread]; // ¶ÁÈ¡ÎÄ¼ş³¤¶È
+            byte[] buf = new byte[unread]; // è¯»å–æ–‡ä»¶é•¿åº¦
             FileInputStream fin = new FileInputStream(f);
             do {
                 int count = fin.read(buf, read, unread);
@@ -247,7 +250,7 @@ public class AttachmentStore {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Â·¾¶ÎÄ¼ş
+     * åˆ é™¤æŒ‡å®šè·¯å¾„æ–‡ä»¶
      *
      * @param path
      */
@@ -351,6 +354,37 @@ public class AttachmentStore {
             }
             if (recyle) {
                 bitmap.recycle();
+            }
+        }
+    }
+
+    public static boolean savePooledByteBuffer(PooledByteBuffer pool, String path) {
+        if (pool == null || pool.size() == 0 || TextUtils.isEmpty(path)) {
+            return false;
+        }
+
+        BufferedOutputStream bos = null;
+        try {
+            FileOutputStream fos = new FileOutputStream(path);
+            bos = new BufferedOutputStream(fos);
+            PooledByteBufferInputStream inputStream = new PooledByteBufferInputStream(pool);
+            byte[] buffer = new byte[1024];
+            int length = 0;
+            while ((length = inputStream.read(buffer)) != -1) {
+                bos.write(buffer, 0, length);
+            }
+            return true;
+
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                }
             }
         }
     }

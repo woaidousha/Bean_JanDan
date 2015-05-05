@@ -77,15 +77,15 @@ public class PictureRViewHolder extends RViewHolder implements View.OnClickListe
             mPicture.setHierarchy(hierarchy);
         }
         mShare.setOnClickListener(this);
-        mShare.setTag(picture.getPicUri());
+        mShare.setTag(picture);
     }
 
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
         if (viewId == R.id.share) {
-            Uri uri = (Uri) v.getTag();
-            ShareUtil.shareImage(uri);
+            SinglePicture picture = (SinglePicture) v.getTag();
+            ShareUtil.shareImage(picture);
         }
     }
 }
