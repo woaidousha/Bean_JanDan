@@ -3,31 +3,11 @@ package org.bean.jandan.model;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import org.bean.jandan.common.util.StringUtil;
-
 /**
  * Created by liuyulong@yixin.im on 2015/4/29.
  */
-public class SinglePicture {
-    private String comment_ID;
-    private String comment_post_ID;
-    private String comment_author;
-    private String comment_author_email;
-    private String comment_author_url;
-    private String comment_author_IP;
-    private String comment_date;
-    private String comment_date_gmt;
-    private String comment_content;
-    private String comment_karma;
-    private String comment_approved;
-    private String comment_agent;
-    private String comment_type;
-    private String comment_parent;
-    private String comment_subscribe;
-    private String comment_reply_ID;
-    private String vote_positive;
-    private String vote_negative;
-    private String text_content;
+public class SinglePicture extends Comment {
+
     private String pic;
 
     public SinglePicture(String comment_ID, String comment_post_ID, String comment_author, String comment_author_email, String comment_author_url, String comment_author_IP, String comment_date, String comment_date_gmt, String comment_content, String comment_karma, String comment_approved, String comment_agent, String comment_type, String comment_parent, String comment_subscribe, String comment_reply_ID, String vote_positive, String vote_negative, String text_content, String pic) {
@@ -51,82 +31,6 @@ public class SinglePicture {
         this.vote_negative = vote_negative;
         this.text_content = text_content;
         this.pic = pic;
-    }
-
-    public String getComment_ID() {
-        return comment_ID;
-    }
-
-    public String getComment_post_ID() {
-        return comment_post_ID;
-    }
-
-    public String getComment_author() {
-        return comment_author;
-    }
-
-    public String getComment_author_email() {
-        return comment_author_email;
-    }
-
-    public String getComment_author_url() {
-        return comment_author_url;
-    }
-
-    public String getComment_author_IP() {
-        return comment_author_IP;
-    }
-
-    public String getComment_date() {
-        return comment_date;
-    }
-
-    public String getComment_date_gmt() {
-        return comment_date_gmt;
-    }
-
-    public String getComment_content() {
-        return comment_content;
-    }
-
-    public String getComment_karma() {
-        return comment_karma;
-    }
-
-    public String getComment_approved() {
-        return comment_approved;
-    }
-
-    public String getComment_agent() {
-        return comment_agent;
-    }
-
-    public String getComment_type() {
-        return comment_type;
-    }
-
-    public String getComment_parent() {
-        return comment_parent;
-    }
-
-    public String getComment_subscribe() {
-        return comment_subscribe;
-    }
-
-    public String getComment_reply_ID() {
-        return comment_reply_ID;
-    }
-
-    public String getVote_positive() {
-        return vote_positive;
-    }
-
-    public String getVote_negative() {
-        return vote_negative;
-    }
-
-    public String getText_content() {
-        return StringUtil.replaceBlank(text_content);
     }
 
     public String getPic() {

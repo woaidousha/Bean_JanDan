@@ -3,6 +3,7 @@ package org.bean.jandan.activity;
 import android.support.v4.app.Fragment;
 
 import org.bean.jandan.R;
+import org.bean.jandan.fragment.JokeFragment;
 import org.bean.jandan.fragment.NewFreshFragment;
 import org.bean.jandan.fragment.OOXXFragment;
 import org.bean.jandan.fragment.WltFragment;
@@ -12,9 +13,11 @@ import org.bean.jandan.fragment.WltFragment;
  */
 public enum  MainMenu {
 
+    JOKE(R.string.main_list_joke, JokeFragment.class),
     POSTS(R.string.main_list_post, NewFreshFragment.class),
     WLT(R.string.main_list_wlt, WltFragment.class),
-    OOXX(R.string.main_list_ooxx, OOXXFragment.class);
+    OOXX(R.string.main_list_ooxx, OOXXFragment.class),
+    ;
 
     public final int mLabelRes;
     public final Class<? extends Fragment> mFragmentClazz;

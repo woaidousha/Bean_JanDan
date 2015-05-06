@@ -3,7 +3,7 @@ package org.bean.jandan.model;
 /**
  * Created by liuyulong@yixin.im on 2015/4/28.
  */
-public abstract class PageResult extends Result{
+public abstract class PageResult<T> extends Result<T> {
 
     private int current_page;
     private int total_comments;

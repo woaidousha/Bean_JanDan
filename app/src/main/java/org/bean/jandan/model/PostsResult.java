@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class PostsResult extends PageResult {
+public class PostsResult extends PageResult<Post> {
 
     private List<Post> posts;
 

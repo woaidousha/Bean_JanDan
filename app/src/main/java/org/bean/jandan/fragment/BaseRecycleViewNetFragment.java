@@ -16,6 +16,8 @@ import org.bean.jandan.model.Result;
 import org.bean.jandan.widget.AutoLoadSwipeRefreshLayout;
 import org.bean.jandan.widget.LoadListener;
 
+import java.util.List;
+
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
@@ -94,10 +96,11 @@ public abstract class BaseRecycleViewNetFragment<T extends Result, E extends Com
             @Override
             public void run() {
                 Boolean isFirstPage = (Boolean) response.request().tag();
+                List res = result.getResults();
                 if (isFirstPage) {
-                    mAdapter.addAll(0, result.getResults());
+                    mAdapter.addAll(0, res);
                 } else {
-                    mAdapter.addAll(result.getResults());
+                    mAdapter.addAll(res);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
                 mAdapter.notifyDataSetChanged();
