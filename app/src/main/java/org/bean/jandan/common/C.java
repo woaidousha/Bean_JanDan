@@ -14,22 +14,23 @@ public interface C {
         String OOXX = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments";
 
         /*评论列表*/
-        String URL_COMMENTS = "http://jandan.net/?oxwlxojflwblxbsapi=get_post&include=comments&id=";
+        String COMMENTS = "http://jandan.net/?oxwlxojflwblxbsapi=get_post&include=comments&id=";
 
         /*发表评论*/
-        String URL_PUSH_COMMENT ="http://jandan.net/?oxwlxojflwblxbsapi=respond.submit_comment";
+        String PUSH_COMMENT = "http://jandan.net/?oxwlxojflwblxbsapi=respond.submit_comment";
 
         /*新鲜事列表*/
-        String URL_FRESH_NEWS = "http://jandan.net/?oxwlxojflwblxbsapi=get_recent_posts&include=url,date,tags,author,title,comment_count,custom_fields&custom_fields=thumb_c,views&dev=1";
+        String POSTS = "http://jandan.net/?oxwlxojflwblxbsapi=get_recent_posts&include=url,date,tags,author," +
+                "title,comment_count,custom_fields&custom_fields=thumb_c,views&dev=1";
 
         /*新鲜事详情*/
-        String URL_DRESH_NEWS_DETAIL = "http://i.jandan.net/?oxwlxojflwblxbsapi=get_post&include=content&id=";
+        String DRESH_NEWS_DETAIL = "http://i.jandan.net/?oxwlxojflwblxbsapi=get_post&include=content&id=";
 
         /*段子*/
-        String URL_DUANZI = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_duan_comments";
+        String DUANZI = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_duan_comments";
 
         /*视频*/
-        String URL_VIDEOS = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_video_comments";
+        String VIDEOS = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_video_comments";
 
         int FIRST_PAGE = 1;
         String PARAM_PAGE = "page";

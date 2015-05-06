@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import org.bean.jandan.common.adapter.viewHolder.IViewHolder;
-
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
  */

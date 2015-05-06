@@ -11,7 +11,7 @@ import org.bean.jandan.R;
 import org.bean.jandan.common.adapter.AdapterDelegate;
 import org.bean.jandan.common.adapter.CommonAdapter;
 import org.bean.jandan.common.adapter.ViewHolder;
-import org.bean.jandan.common.adapter.viewHolder.PictureViewHolder;
+import org.bean.jandan.adapter.vh.PictureViewHolder;
 import org.bean.jandan.model.Page;
 import org.bean.jandan.model.PictureResult;
 import org.bean.jandan.model.Result;
@@ -94,7 +94,7 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
     @Override
     public void onSuccess(final Result result, final Response response) {
         final PictureResult pictureResult = ((PictureResult) result);
-        for (SinglePicture singlePicture : pictureResult.getPictures()) {
+        for (SinglePicture singlePicture : pictureResult.getResults()) {
             mPictures.remove(singlePicture);
         }
         getActivity().runOnUiThread(new Runnable() {
@@ -103,9 +103,9 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
                 if (result instanceof PictureResult) {
                     Boolean isFirstPage  = (Boolean) response.request().tag();
                     if (isFirstPage) {
-                        mPictures.addAll(0, pictureResult.getPictures());
+                        mPictures.addAll(0, pictureResult.getResults());
                     } else {
-                        mPictures.addAll(pictureResult.getPictures());
+                        mPictures.addAll(pictureResult.getResults());
                     }
                     mAdapter.notifyDataSetChanged();
                 }

@@ -1,6 +1,7 @@
 package org.bean.jandan.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/28.
@@ -16,7 +17,8 @@ public class PictureResult extends PageResult {
         this.comments = comments;
     }
 
-    public ArrayList<SinglePicture> getPictures() {
+    @Override
+    public List<SinglePicture> getResults() {
         ArrayList<SinglePicture> pictures = new ArrayList<>();
         for (Picture picture : comments) {
             pictures.addAll(picture.toSinglePictures());

@@ -1,6 +1,5 @@
-package org.bean.jandan.common.adapter.viewHolder;
+package org.bean.jandan.adapter.vh;
 
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;

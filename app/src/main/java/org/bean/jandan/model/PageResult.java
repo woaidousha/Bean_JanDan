@@ -3,12 +3,14 @@ package org.bean.jandan.model;
 /**
  * Created by liuyulong@yixin.im on 2015/4/28.
  */
-public class PageResult extends Result{
+public abstract class PageResult extends Result{
 
     private int current_page;
     private int total_comments;
     private int page_count;
     private int count;
+    private int count_total;
+    private int pages;
 
     public int getCurrent_page() {
         return current_page;
@@ -19,7 +21,7 @@ public class PageResult extends Result{
     }
 
     public int getTotal_comments() {
-        return total_comments;
+        return total_comments + count_total;
     }
 
     public void setTotal_comments(int total_comments) {
@@ -27,7 +29,7 @@ public class PageResult extends Result{
     }
 
     public int getPage_count() {
-        return page_count;
+        return page_count + pages;
     }
 
     public void setPage_count(int page_count) {
@@ -40,5 +42,13 @@ public class PageResult extends Result{
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public void setCount_total(int count_total) {
+        this.count_total = count_total;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 }

@@ -1,4 +1,4 @@
-package org.bean.jandan.common.adapter.viewHolder;
+package org.bean.jandan.adapter.vh;
 
 import android.view.View;
 import android.widget.ImageView;
