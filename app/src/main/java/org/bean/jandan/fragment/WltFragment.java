@@ -5,7 +5,7 @@ import org.bean.jandan.common.C;
 /**
  * Created by liuyulong@yixin.im on 2015/4/28.
  */
-public class WltFragment extends BaseRecycleViewPicFragment {
+public class WltFragment extends PicFragment {
     @Override
     protected String url() {
         return C.URL.PIC;

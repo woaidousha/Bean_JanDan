@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.bean.jandan.R;
-import org.bean.jandan.fragment.BaseRecycleViewPicFragment;
+import org.bean.jandan.fragment.PicFragment;
 
 public class MainActivity extends BaseColorActivity implements AdapterView.OnItemClickListener {
 
@@ -91,7 +91,7 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
     public void onDoubleClick(View v) {
         int viewId = v.getId();
         if (viewId == R.id.main_tool_bar) {
-            BaseRecycleViewPicFragment fragment = (BaseRecycleViewPicFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            PicFragment fragment = (PicFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             fragment.goToTop();
         }
     }

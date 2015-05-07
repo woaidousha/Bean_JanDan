@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public abstract class CommenRecycleAdapter<T> extends RecyclerView.Adapter implements
+public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter implements
         AdapterDataSource<T> {
 
     private Context mContext;
     private List<T> mDataSource;
 
-    public CommenRecycleAdapter(Context context) {
+    public CommonRecycleAdapter(Context context) {
         this.mContext = context;
         this.mDataSource = new ArrayList<>();
     }

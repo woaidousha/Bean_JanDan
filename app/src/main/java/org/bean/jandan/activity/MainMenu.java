@@ -13,10 +13,10 @@ import org.bean.jandan.fragment.WltFragment;
  */
 public enum  MainMenu {
 
-    JOKE(R.string.main_list_joke, JokeFragment.class),
-    POSTS(R.string.main_list_post, NewFreshFragment.class),
     WLT(R.string.main_list_wlt, WltFragment.class),
     OOXX(R.string.main_list_ooxx, OOXXFragment.class),
+    JOKE(R.string.main_list_joke, JokeFragment.class),
+    POSTS(R.string.main_list_post, NewFreshFragment.class),
     ;
 
     public final int mLabelRes;

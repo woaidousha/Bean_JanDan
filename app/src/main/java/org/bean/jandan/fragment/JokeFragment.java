@@ -7,7 +7,7 @@ import org.bean.jandan.model.JokeResult;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class JokeFragment extends BaseRecycleViewNetFragment<JokeResult, JokeAdapter> {
+public class JokeFragment extends BaseRecycleViewNetFragment<JokeResult> {
 
     @Override
     protected String url() {

@@ -10,7 +10,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.bean.jandan.R;
-import org.bean.jandan.common.adapter.CommenRecycleAdapter;
+import org.bean.jandan.common.adapter.CommonRecycleAdapter;
 import org.bean.jandan.model.Page;
 import org.bean.jandan.model.Result;
 import org.bean.jandan.widget.AutoLoadSwipeRefreshLayout;
@@ -21,17 +21,17 @@ import java.util.List;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public abstract class BaseRecycleViewNetFragment<T extends Result, E extends CommenRecycleAdapter> extends
+public abstract class BaseRecycleViewNetFragment<T extends Result> extends
         BaseNetFragment<T> implements LoadListener {
 
-    protected E mAdapter;
+    protected CommonRecycleAdapter mAdapter;
 
     protected Page mPage;
     protected AutoLoadSwipeRefreshLayout mSwipeRefreshLayout;
     protected RecyclerView mRecycleView;
 
     protected abstract String url();
-    protected abstract E configAdapter();
+    protected abstract CommonRecycleAdapter configAdapter();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

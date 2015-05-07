@@ -7,7 +7,7 @@ import org.bean.jandan.model.PostsResult;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class NewFreshFragment extends BaseRecycleViewNetFragment<PostsResult, PostsAdapter> {
+public class NewFreshFragment extends BaseRecycleViewNetFragment<PostsResult> {
     @Override
     protected String url() {
         return C.URL.POSTS;

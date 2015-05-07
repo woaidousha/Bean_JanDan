@@ -6,7 +6,7 @@ import org.bean.jandan.model.PictureResult;
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public abstract class BaseRecycleViewPicFragment extends BaseRecycleViewNetFragment<PictureResult, PictureAdapter> {
+public abstract class PicFragment extends BaseRecycleViewNetFragment<PictureResult> {
 
     @Override
     protected PictureAdapter configAdapter() {
