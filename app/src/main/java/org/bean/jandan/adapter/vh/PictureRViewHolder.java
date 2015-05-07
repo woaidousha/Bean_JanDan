@@ -4,19 +4,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import org.bean.jandan.R;
+import org.bean.jandan.adapter.helper.FetchImageHelper;
 import org.bean.jandan.common.util.ShareUtil;
 import org.bean.jandan.model.SinglePicture;
-import org.bean.jandan.widget.drawable.ImageProgressBarDrawable;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
@@ -55,26 +48,7 @@ public class PictureRViewHolder extends RViewHolder implements View.OnClickListe
         String commentContent = picture.getText_content();
         mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mCommentContent.setText(commentContent);
-        ImageProgressBarDrawable drawable;
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(picture.getPicUri())
-                                                  .setProgressiveRenderingEnabled(true)
-                                                  .build();
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
-                                            .setImageRequest(request)
-                                            .setAutoPlayAnimations(true)
-                                            .setOldController(mPicture.getController())
-                                            .setCallerContext(mPicture.getHierarchy())
-                                            .build();
-        mPicture.setController(controller);
-        if (mPicture.getHierarchy() != null) {
-            drawable = new ImageProgressBarDrawable(mResources);
-            GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(mResources)
-                    .setFadeDuration(300)
-                    .setProgressBarImage(drawable)
-                    .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
-                    .build();
-            mPicture.setHierarchy(hierarchy);
-        }
+        FetchImageHelper.fetchRecyclerViewImage(mPicture, picture.getPicUri());
         mShare.setOnClickListener(this);
         mShare.setTag(picture);
     }
