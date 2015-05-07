@@ -39,7 +39,7 @@ public class ShareUtil {
                     CloseableReference<PooledByteBuffer> reference = dataSource.getResult();
                     try {
                         PooledByteBuffer buffer = reference.get();
-                        String path = StorageUtil.getWritePath(StringUtil.makeMd5(picture.getPic()), C.Directory
+                        String path = StroageUtil.getWritePath(StringUtil.makeMd5(picture.getPic()), C.Directory
                                 .SHARE);
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         if (picture.isGif()) {

@@ -49,7 +49,7 @@ public interface C {
 
     enum Directory {
 
-        SHARE("share", false);
+        SHARE("share", false), TYPE_LOG("log", false);
 
         public static final String APP_DIRECTORY_NAME = "BeanJD";
 

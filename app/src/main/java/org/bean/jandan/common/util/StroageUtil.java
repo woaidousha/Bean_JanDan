@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by liuyulong@yixin.im on 2015/5/5.
  */
-public class StorageUtil {
+public class StroageUtil {
 
     private static boolean sMounted = false;
     private static boolean sFolderReady = false;

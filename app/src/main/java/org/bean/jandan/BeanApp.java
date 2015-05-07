@@ -10,8 +10,8 @@ import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 
 import org.bean.jandan.common.C;
-import org.bean.jandan.common.util.DebugLog;
-import org.bean.jandan.common.util.StorageUtil;
+import org.bean.jandan.common.crash.AppCrashHandler;
+import org.bean.jandan.common.util.StroageUtil;
 
 import java.io.File;
 
@@ -26,9 +26,9 @@ public class BeanApp extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        DebugLog.d(BeanApp.this.getExternalCacheDir().getAbsolutePath());
+        AppCrashHandler.getInstance(this);
         initFresco();
-        StorageUtil.init();
+        StroageUtil.init();
     }
 
     public static BeanApp getApp() {
