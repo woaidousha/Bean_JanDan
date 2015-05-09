@@ -19,8 +19,4 @@ public class JokeFragment extends BaseRecycleViewNetFragment<JokeResult> {
         return new JokeAdapter(getActivity());
     }
 
-    @Override
-    protected Class getResultClazz() {
-        return JokeResult.class;
-    }
 }

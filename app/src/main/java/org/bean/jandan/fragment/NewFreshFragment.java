@@ -18,8 +18,4 @@ public class NewFreshFragment extends BaseRecycleViewNetFragment<PostsResult> {
         return new PostsAdapter(getActivity());
     }
 
-    @Override
-    protected Class getResultClazz() {
-        return PostsResult.class;
-    }
 }

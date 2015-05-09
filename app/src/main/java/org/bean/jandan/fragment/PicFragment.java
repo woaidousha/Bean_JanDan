@@ -13,9 +13,4 @@ public abstract class PicFragment extends BaseRecycleViewNetFragment<PictureResu
         return new PictureAdapter(getActivity());
     }
 
-    @Override
-    protected Class getResultClazz() {
-        return PictureResult.class;
-    }
-
 }

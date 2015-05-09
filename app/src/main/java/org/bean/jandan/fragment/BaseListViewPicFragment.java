@@ -121,8 +121,4 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
     public void onFinish() {
     }
 
-    @Override
-    protected Class getResultClazz() {
-        return PictureResult.class;
-    }
 }
