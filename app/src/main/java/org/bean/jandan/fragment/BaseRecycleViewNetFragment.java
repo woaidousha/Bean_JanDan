@@ -73,7 +73,12 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
     }
 
     public void goToTop() {
-        mRecycleView.smoothScrollToPosition(0);
+        int position = mRecycleView.getChildPosition(mRecycleView.getChildAt(0));
+        if (position > 10) {
+            mRecycleView.scrollToPosition(0);
+        } else {
+            mRecycleView.smoothScrollToPosition(0);
+        }
     }
 
     @Override
