@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
+import org.bean.jandan.activity.PictureActivity;
 import org.bean.jandan.adapter.helper.FetchImageHelper;
 import org.bean.jandan.common.util.ShareUtil;
 import org.bean.jandan.model.SinglePicture;
@@ -14,7 +15,7 @@ import org.bean.jandan.model.SinglePicture;
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public class PictureRViewHolder extends RViewHolder implements View.OnClickListener {
+public class PictureRViewHolder extends RViewHolder<SinglePicture> implements View.OnClickListener {
 
     private TextView mAuthor;
     private SimpleDraweeView mPicture;
@@ -39,26 +40,30 @@ public class PictureRViewHolder extends RViewHolder implements View.OnClickListe
         mCommentContent = (TextView) view.findViewById(R.id.comment_content);
     }
 
-    public void refresh(Object item) {
-        SinglePicture picture = (SinglePicture) item;
-        mAuthor.setText(picture.getComment_author());
-        mDate.setText(picture.getComment_date());
-        mOO.setText(String.format(mResources.getString(R.string.button_text_oo), picture.getVote_positive()));
-        mXX.setText(String.format(mResources.getString(R.string.button_text_xx), picture.getVote_negative()));
-        String commentContent = picture.getText_content();
+    @Override
+    public void refresh(SinglePicture item) {
+        super.refresh(item);
+        mAuthor.setText(item.getComment_author());
+        mDate.setText(item.getComment_date());
+        mOO.setText(String.format(mResources.getString(R.string.button_text_oo), item.getVote_positive()));
+        mXX.setText(String.format(mResources.getString(R.string.button_text_xx), item.getVote_negative()));
+        String commentContent = item.getText_content();
         mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mCommentContent.setText(commentContent);
-        FetchImageHelper.fetchRecyclerViewImage(mPicture, picture.getPicUri());
+        FetchImageHelper.fetchRecyclerViewImage(mPicture, item.getPicUri());
+        mPicture.setOnClickListener(this);
         mShare.setOnClickListener(this);
-        mShare.setTag(picture);
+        mShare.setTag(item);
     }
 
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
+        SinglePicture picture = (SinglePicture) mData;
         if (viewId == R.id.share) {
-            SinglePicture picture = (SinglePicture) v.getTag();
             ShareUtil.shareImage(picture);
+        } else if (viewId == R.id.picture) {
+            PictureActivity.start(mContext, picture.getPicUri());
         }
     }
 }

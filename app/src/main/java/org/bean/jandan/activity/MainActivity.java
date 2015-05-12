@@ -1,10 +1,8 @@
 package org.bean.jandan.activity;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,36 +20,28 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
 
     private DrawerLayout mDrawerLayout;
     private ListView mListView;
-    private ActionBarDrawerToggle mToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViews();
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
     }
 
-    private void findViews() {
+    protected void findViews() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mDrawerLayout.setScrimColor(getResources().getColor(R.color.drawer_layout_scrim_color));
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolbar(), R.string.app_name,
-                R.string.app_name);
-        mDrawerLayout.setDrawerListener(mToggle);
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mToggle.syncState();
-        initMenu();
+    protected DrawerLayout getDrawerLayout() {
+        return mDrawerLayout;
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mToggle.onConfigurationChanged(newConfig);
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        initMenu();
     }
 
     @Override

@@ -31,7 +31,7 @@ public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter imple
         ((RViewHolder) viewHolder).refresh(getItem(position));
     }
 
-    public Object getItem(int position) {
+    public T getItem(int position) {
         return mDataSource.get(position);
     }
 

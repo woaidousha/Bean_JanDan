@@ -1,7 +1,10 @@
 package org.bean.jandan.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,10 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
 
     SystemBarTintManager mTintManager;
     private Toolbar mToolbar;
+    private ActionBarDrawerToggle mToggle;
+
+    protected abstract int getLayoutRes();
+    protected abstract void findViews();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,8 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
         mTintManager.setStatusBarTintEnabled(true);
         mTintManager.setNavigationBarTintEnabled(true);
         mTintManager.setTintDrawable(getResources().getDrawable(R.drawable.status_bar_color));
+        setContentView(getLayoutRes());
+        findViews();
     }
 
     @Override
@@ -45,7 +54,46 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
         setSupportActionBar(mToolbar);
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        if (getDrawerLayout() != null) {
+            mToggle = new ActionBarDrawerToggle(this, getDrawerLayout(), getToolbar(), R.string.app_name,
+                    R.string.app_name);
+            getDrawerLayout().setDrawerListener(mToggle);
+            mToggle.syncState();
+        } else {
+            mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (getDrawerLayout() != null) {
+            mToggle.onConfigurationChanged(newConfig);
+        }
+    }
+
     public Toolbar getToolbar() {
         return mToolbar;
+    }
+
+    public ActionBarDrawerToggle getActionBarToggle() {
+        return mToggle;
+    }
+
+    protected DrawerLayout getDrawerLayout() {
+        return null;
+    }
+
+    @Override
+    public void onDoubleClick(View v) {
     }
 }

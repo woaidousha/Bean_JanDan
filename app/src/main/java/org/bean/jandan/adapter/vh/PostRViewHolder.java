@@ -14,7 +14,7 @@ import org.bean.jandan.model.Post;
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public class PostRViewHolder extends RViewHolder {
+public class PostRViewHolder extends RViewHolder<Post> {
 
     private TextView mAuthor;
     private SimpleDraweeView mPicture;
@@ -33,14 +33,15 @@ public class PostRViewHolder extends RViewHolder {
         mCommentContent = (TextView) view.findViewById(R.id.comment_content);
     }
 
-    public void refresh(Object item) {
-        Post post = (Post) item;
-        mAuthor.setText(post.getAuthor().getName());
-        mDate.setText(post.getDate());
-        String commentContent = post.getTitle();
+    @Override
+    public void refresh(Post item) {
+        super.refresh(item);
+        mAuthor.setText(item.getAuthor().getName());
+        mDate.setText(item.getDate());
+        String commentContent = item.getTitle();
         mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mCommentContent.setText(commentContent);
-        String thumbUrl = post.getCustom_fields().getFirstThumb();
+        String thumbUrl = item.getCustom_fields().getFirstThumb();
         if (!TextUtils.isEmpty(thumbUrl)) {
             FetchImageHelper.fetchRecyclerViewImage(mPicture, Uri.parse(thumbUrl));
         }

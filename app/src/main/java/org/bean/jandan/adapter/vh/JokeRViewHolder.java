@@ -10,7 +10,7 @@ import org.bean.jandan.model.Comment;
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public class JokeRViewHolder extends RViewHolder {
+public class JokeRViewHolder extends RViewHolder<Comment> {
 
     private TextView mAuthor;
     private TextView mDate;
@@ -27,11 +27,12 @@ public class JokeRViewHolder extends RViewHolder {
         mTextContent = (TextView) view.findViewById(R.id.text_content);
     }
 
-    public void refresh(Object item) {
-        Comment comment = (Comment) item;
-        mAuthor.setText(comment.getComment_author());
-        mDate.setText(comment.getComment_date());
-        String commentContent = comment.getText_content();
+    @Override
+    public void refresh(Comment item) {
+        super.refresh(item);
+        mAuthor.setText(item.getComment_author());
+        mDate.setText(item.getComment_date());
+        String commentContent = item.getText_content();
         mTextContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mTextContent.setText(commentContent);
     }
