@@ -2,7 +2,6 @@ package org.bean.jandan.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +41,10 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
             ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
             mResultClass =(Class<T>) parameterizedType.getActualTypeArguments()[0];
             if (mResultClass == null) {
-                throw new RuntimeException(getClass().getName() + " 出错了 查查啥问题吧");
+                throw new RuntimeException(getClass().getName() + " error");
             }
         } else {
-            throw new RuntimeException(getClass().getName() + " 你在父类中实现了泛型，或者你没有实现泛型。");
+            throw new RuntimeException(getClass().getName() + ", it will not run to here");
         }
         return view;
     }

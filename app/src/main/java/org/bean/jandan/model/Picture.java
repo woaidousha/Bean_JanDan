@@ -19,6 +19,9 @@ public class Picture extends Comment {
 
     public ArrayList<SinglePicture> toSinglePictures() {
         ArrayList<SinglePicture> pictures = new ArrayList<>();
+        if (pics == null) {
+            return pictures;
+        }
         for (String pic : pics) {
             SinglePicture singlePicture = new SinglePicture(comment_ID, comment_post_ID, comment_author,
                     comment_author_email, comment_author_url, comment_author_IP, comment_date, comment_date_gmt, comment_content, comment_karma, comment_approved, comment_agent, comment_type, comment_parent, comment_subscribe, comment_reply_ID, vote_positive, vote_negative, text_content, pic);
