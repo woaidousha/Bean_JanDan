@@ -1,5 +1,7 @@
 package org.bean.jandan.model;
 
+import org.bean.jandan.common.util.StringUtil;
+
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
@@ -31,7 +33,7 @@ public class Post {
     }
 
     public String getTitle() {
-        return title;
+        return StringUtil.replaceBlank(title);
     }
 
     public void setTitle(String title) {

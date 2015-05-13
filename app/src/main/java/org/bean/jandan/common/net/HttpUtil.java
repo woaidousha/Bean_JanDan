@@ -4,8 +4,6 @@ import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 
-import org.bean.jandan.common.util.DebugLog;
-
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
  */
@@ -22,7 +20,6 @@ public class HttpUtil {
     }
 
     public static void enqueue(Request request, Callback callback) {
-        DebugLog.d("request url : " + request.urlString());
         client().newCall(request)
                 .enqueue(callback);
     }

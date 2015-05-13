@@ -1,18 +1,17 @@
 package org.bean.jandan.fragment;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
-import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.bean.jandan.R;
+import org.bean.jandan.adapter.vh.PictureViewHolder;
 import org.bean.jandan.common.adapter.AdapterDelegate;
 import org.bean.jandan.common.adapter.CommonAdapter;
 import org.bean.jandan.common.adapter.ViewHolder;
-import org.bean.jandan.adapter.vh.PictureViewHolder;
-import org.bean.jandan.model.Page;
+import org.bean.jandan.common.page.Page;
+import org.bean.jandan.common.page.PageHelper;
 import org.bean.jandan.model.PictureResult;
 import org.bean.jandan.model.Result;
 import org.bean.jandan.model.SinglePicture;
@@ -50,7 +49,7 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
     }
 
     private void initList() {
-        mPage = new Page();
+        mPage = new Page(url());
         mListView.setLoadListener(this);
         mAdapter = new CommonAdapter(this, mPictures, new AdapterDelegate() {
             @Override
@@ -73,22 +72,7 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
 
     @Override
     public boolean load(boolean head) {
-        String url = null;
-        if (!head) {
-            url = mPage.nextPage(url());
-        } else {
-            url = mPage.firstPage(url());
-        }
-        return request(buildRequest(url), this);
-    }
-
-    @Override
-    protected Request buildRequest(String url) {
-        if (TextUtils.isEmpty(url)) {
-            return null;
-        }
-        Request.Builder builder = new Request.Builder();
-        return builder.url(url).tag(mPage.isFirstPage(url)).build();
+        return request(PageHelper.createPageReq(mPage, head), this);
     }
 
     @Override

@@ -12,5 +12,6 @@ public interface OnResultCallback {
 
     public void onFailed();
 
+    /** run in ui thread */
     public void onSuccess(Result result, Response response);
 }

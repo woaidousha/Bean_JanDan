@@ -28,8 +28,6 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
     private static final String TAG = "BaseNetFragment";
     private Class<T> mResultClass;
 
-    protected abstract Request buildRequest(String url);
-
     protected abstract int viewId();
 
     @Override
@@ -67,10 +65,18 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
     }
 
     @Override
-    public void onResponse(Response response) throws IOException {
+    public void onResponse(final Response response) throws IOException {
         String result = response.body().string();
         final T t = JsonUtil.gson().fromJson(result, mResultClass);
-        onSuccess(t, response);
+        if (getActivity() == null) {
+            return;
+        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                onSuccess(t, response);
+            }
+        });
     }
 
 }

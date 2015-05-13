@@ -1,5 +1,7 @@
 package org.bean.jandan.model;
 
+import org.bean.jandan.common.util.StringUtil;
+
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
@@ -170,7 +172,7 @@ public class Comment {
     }
 
     public String getText_content() {
-        return text_content;
+        return StringUtil.replaceBlank(text_content);
     }
 
     public void setText_content(String text_content) {

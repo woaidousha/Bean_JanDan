@@ -1,9 +1,8 @@
-package org.bean.jandan.model;
+package org.bean.jandan.common.page;
 
 import android.text.TextUtils;
 
 import org.bean.jandan.common.C;
-import org.bean.jandan.common.util.DebugLog;
 import org.bean.jandan.common.util.URLUtil;
 
 import java.util.HashMap;
@@ -14,10 +13,24 @@ import java.util.Map;
  */
 public class Page {
 
+    private String baseUrl;
+
     private int currentPage;
     private int pageSize;
     private int totalPage = Integer.MAX_VALUE;
     private int totalSize;
+
+    public Page(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
 
     public int getCurrentPage() {
         return currentPage;
@@ -55,7 +68,7 @@ public class Page {
         return ++currentPage;
     }
 
-    public String nextPage(String baseUrl) {
+    public String nextPage() {
         if (currentPage == totalPage) {
             return null;
         }
@@ -63,7 +76,7 @@ public class Page {
         return pageUrl(baseUrl, getCurrentPage());
     }
 
-    public String firstPage(String baseUrl) {
+    public String firstPage() {
         return pageUrl(baseUrl, C.URL.FIRST_PAGE);
     }
 
@@ -76,7 +89,6 @@ public class Page {
         builder.append(C.URL.PARAM_PAGE);
         builder.append("=");
         builder.append(page);
-        DebugLog.d("url : " + builder.toString());
         return builder.toString();
     }
 
