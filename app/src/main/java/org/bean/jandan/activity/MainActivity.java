@@ -1,7 +1,6 @@
 package org.bean.jandan.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -62,6 +61,7 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
     }
 
     private void initMenu() {
+        MainMenu.initMenuFragments(getSupportFragmentManager().beginTransaction());
         MenuAdapter adapter = new MenuAdapter();
         mListView.setAdapter(adapter);
         mListView.performItemClick(mListView.getChildAt(0), 0, 0);
@@ -70,9 +70,7 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MainMenu menu = (MainMenu) parent.getAdapter().getItem(position);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, menu.getFragment());
-        transaction.commit();
+        menu.showMenuFragment(getSupportFragmentManager().beginTransaction());
         mDrawerLayout.closeDrawers();
         getToolbar().setTitle(menu.mLabelRes);
     }

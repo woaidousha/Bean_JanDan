@@ -1,6 +1,5 @@
 package org.bean.jandan.fragment;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -33,13 +32,6 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
     protected abstract CommonRecycleAdapter configAdapter();
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        findViews(view);
-        initList();
-    }
-
-    @Override
     protected int viewId() {
         return R.layout.fragment_recycle_view_picture_layout;
     }
@@ -53,7 +45,8 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
         mSwipeRefreshLayout.setLoadListener(this);
     }
 
-    private void initList() {
+    @Override
+    protected void onInit() {
         mPage = new Page(url());
         mAdapter = configAdapter();
         mRecycleView.setAdapter(mAdapter);

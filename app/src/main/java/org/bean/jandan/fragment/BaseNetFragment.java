@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.RefWatcher;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.bean.jandan.BeanApp;
 import org.bean.jandan.common.net.CallbackDelegate;
 import org.bean.jandan.common.net.HttpUtil;
 import org.bean.jandan.common.net.OnResultCallback;
@@ -19,6 +21,7 @@ import org.bean.jandan.model.Result;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
@@ -27,8 +30,17 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
 
     private static final String TAG = "BaseNetFragment";
     private Class<T> mResultClass;
+    private AtomicBoolean mHasInited = new AtomicBoolean(false);
 
     protected abstract int viewId();
+    protected abstract void findViews(View v);
+    protected abstract void onInit();
+
+    protected void init() {
+        if (mHasInited.compareAndSet(false, true)) {
+            onInit();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +57,13 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
             throw new RuntimeException(getClass().getName() + ", it will not run to here");
         }
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        findViews(view);
+        init();
     }
 
     protected boolean request(Request request, final OnResultCallback callback) {
@@ -84,4 +103,9 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
         });
     }
 
+    @Override public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = BeanApp.getRefWatcher(getActivity());
+        refWatcher.watch(this);
+    }
 }

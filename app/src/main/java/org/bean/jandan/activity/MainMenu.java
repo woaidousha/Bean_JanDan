@@ -1,6 +1,7 @@
 package org.bean.jandan.activity;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 
 import org.bean.jandan.R;
 import org.bean.jandan.fragment.JokeFragment;
@@ -23,7 +24,7 @@ public enum  MainMenu {
     public final Class<? extends Fragment> mFragmentClazz;
     public Fragment mFragment;
 
-    private MainMenu(int labelRes, Class<? extends Fragment> clazz) {
+    MainMenu(int labelRes, Class<? extends Fragment> clazz) {
         this.mLabelRes = labelRes;
         this.mFragmentClazz = clazz;
     }
@@ -39,5 +40,23 @@ public enum  MainMenu {
             }
         }
         return mFragment;
+    }
+
+    public static void initMenuFragments(FragmentTransaction transaction) {
+        for (MainMenu menu : MainMenu.values()) {
+            transaction.add(R.id.fragment_container, menu.getFragment());
+        }
+        for (MainMenu menu : MainMenu.values()) {
+            transaction.hide(menu.getFragment());
+        }
+        transaction.commitAllowingStateLoss();
+    }
+
+    public void showMenuFragment(FragmentTransaction transaction) {
+        for (MainMenu menu : MainMenu.values()) {
+            transaction.hide(menu.getFragment());
+        }
+        transaction.show(getFragment());
+        transaction.commitAllowingStateLoss();
     }
 }
