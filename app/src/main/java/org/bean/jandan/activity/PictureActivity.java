@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -14,7 +15,7 @@ import org.bean.jandan.adapter.helper.FetchImageHelper;
 /**
  * Created by liuyulong@yixin.im on 2015/5/12.
  */
-public class PictureActivity extends BaseColorActivity {
+public class PictureActivity extends BaseColorActivity implements View.OnClickListener {
 
     public static void start(Context context, Uri data) {
         Intent intent = new Intent(context, PictureActivity.class);
@@ -43,6 +44,7 @@ public class PictureActivity extends BaseColorActivity {
     @Override
     protected void findViews() {
         mPicutre = (SimpleDraweeView) findViewById(R.id.picture);
+        mPicutre.setOnClickListener(this);
     }
 
     private void processIntent() {
@@ -53,5 +55,12 @@ public class PictureActivity extends BaseColorActivity {
             return;
         }
         FetchImageHelper.fetchRecyclerViewImage(mPicutre, mData);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mPicutre) {
+            finish();
+        }
     }
 }

@@ -54,7 +54,12 @@ public abstract class BaseNetFragment<T extends Result> extends Fragment impleme
         HttpUtil.enqueue(request, new CallbackDelegate(this) {
             @Override
             public void onFinish() {
-                callback.onFinish();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onFinish();
+                    }
+                });
             }
         });
         return true;

@@ -93,7 +93,6 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
                 } else {
                     mAdapter.addAll(res);
                 }
-                mSwipeRefreshLayout.setRefreshing(false);
                 mAdapter.notifyDataSetChanged();
             }
         });
@@ -105,5 +104,6 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
 
     @Override
     public void onFinish() {
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
