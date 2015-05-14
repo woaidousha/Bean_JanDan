@@ -11,5 +11,5 @@ public interface AdapterDataSource<T> {
     public boolean addAll(List<T> t);
     public boolean remove(T t);
     public T remove(int index);
-
+    public void notifyDataSetChanged();
 }

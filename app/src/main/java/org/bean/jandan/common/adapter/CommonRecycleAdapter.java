@@ -49,7 +49,7 @@ public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter imple
         return mDataSource.addAll(data);
     }
 
-    public boolean remove(T t) {
+    public boolean remove(Object t) {
         return mDataSource.remove(t);
     }
 

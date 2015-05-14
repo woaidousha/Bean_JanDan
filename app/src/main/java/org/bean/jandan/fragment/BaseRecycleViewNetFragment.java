@@ -4,31 +4,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.squareup.okhttp.Response;
-
 import org.bean.jandan.R;
+import org.bean.jandan.common.adapter.AdapterDataSource;
 import org.bean.jandan.common.adapter.CommonRecycleAdapter;
-import org.bean.jandan.common.page.Page;
-import org.bean.jandan.common.page.PageHelper;
 import org.bean.jandan.model.Result;
 import org.bean.jandan.widget.AutoLoadSwipeRefreshLayout;
 import org.bean.jandan.widget.LoadListener;
 
-import java.util.List;
-
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public abstract class BaseRecycleViewNetFragment<T extends Result> extends
-        BaseNetFragment<T> implements LoadListener {
+public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseNetResultsFragment<T> implements
+        LoadListener {
 
     protected CommonRecycleAdapter mAdapter;
 
-    protected Page mPage;
     protected AutoLoadSwipeRefreshLayout mSwipeRefreshLayout;
     protected RecyclerView mRecycleView;
 
-    protected abstract String url();
     protected abstract CommonRecycleAdapter configAdapter();
 
     @Override
@@ -47,19 +40,15 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
 
     @Override
     protected void onInit() {
-        mPage = new Page(url());
+        super.onInit();
         mAdapter = configAdapter();
         mRecycleView.setAdapter(mAdapter);
         load(true);
     }
 
     @Override
-    public boolean load(boolean head) {
-        if (getActivity() == null || isDetached()) {
-            return false;
-        }
+    public void preload() {
         mSwipeRefreshLayout.setRefreshing(true);
-        return request(PageHelper.createPageReq(mPage, head), this);
     }
 
     public void goToTop() {
@@ -72,31 +61,17 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends
     }
 
     @Override
-    public void onSuccess(final Result result, final Response response) {
-        for (Object object : result.getResults()) {
-            mAdapter.remove(object);
-        }
+    public void onFinish() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Boolean isFirstPage = (Boolean) response.request().tag();
-                List res = result.getResults();
-                if (isFirstPage) {
-                    mAdapter.addAll(0, res);
-                } else {
-                    mAdapter.addAll(res);
-                }
-                mAdapter.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     @Override
-    public void onFailed() {
-    }
-
-    @Override
-    public void onFinish() {
-        mSwipeRefreshLayout.setRefreshing(false);
+    protected AdapterDataSource getDataSource() {
+        return mAdapter;
     }
 }

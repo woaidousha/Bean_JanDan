@@ -18,12 +18,17 @@ import org.bean.jandan.model.SinglePicture;
 import org.bean.jandan.widget.LoadListener;
 import org.bean.jandan.widget.PullToRefreshListView;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
  */
-public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureResult> implements LoadListener {
+public abstract class BaseListViewPicFragment<T extends Result> extends BaseNetResultsFragment<T> implements
+        LoadListener {
+
+    private Class<T> mResultClass;
 
     private Page mPage;
     private ArrayList<SinglePicture> mPictures = new ArrayList<>();
@@ -32,6 +37,21 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
     protected PullToRefreshListView mListView;
 
     protected abstract String url();
+
+    public BaseListViewPicFragment() {
+        Type genericSuperclass = getClass().getGenericSuperclass();
+
+        if (genericSuperclass instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
+            mResultClass =(Class<T>) parameterizedType.getActualTypeArguments()[0];
+            if (mResultClass == null) {
+                throw new RuntimeException(getClass().getName() + " error");
+            }
+        } else {
+            throw new RuntimeException(getClass().getName() + ", it will not run to here");
+        }
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -72,11 +92,11 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
 
     @Override
     public boolean load(boolean head) {
-        return request(PageHelper.createPageReq(mPage, head), this);
+        return request(PageHelper.createPageReq(mPage, head), mResultClass);
     }
 
     @Override
-    public void onSuccess(final Result result, final Response response) {
+    public void onResponse(final Response response, final T result) {
         final PictureResult pictureResult = ((PictureResult) result);
         for (SinglePicture singlePicture : pictureResult.getResults()) {
             mPictures.remove(singlePicture);
@@ -95,10 +115,6 @@ public abstract class BaseListViewPicFragment extends BaseNetFragment<PictureRes
                 }
             }
         });
-    }
-
-    @Override
-    public void onFailed() {
     }
 
     @Override

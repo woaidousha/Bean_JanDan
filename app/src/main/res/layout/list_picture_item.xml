@@ -82,6 +82,15 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/comments"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/button_text_comments"/>
+
+            <TextView
                 android:id="@+id/share"
                 style="@style/Base.TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"

@@ -1,17 +1,17 @@
 package org.bean.jandan.common.net;
 
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.bean.jandan.model.Result;
+import java.io.IOException;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/28.
  */
-public interface OnResultCallback {
+public interface OnResultCallback<T> {
     public void onFinish();
 
-    public void onFailed();
+    public void onResponse(Response response, T t);
 
-    /** run in ui thread */
-    public void onSuccess(Result result, Response response);
+    public void onFailure(Request request, IOException e);
 }

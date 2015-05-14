@@ -15,5 +15,6 @@
 
     <string name="button_text_oo">OO  %s</string>
     <string name="button_text_xx">XX  %s</string>
-    <string name="button_text_share">share</string>
+    <string name="button_text_comments">Comments</string>
+    <string name="button_text_share">Share</string>
 </resources>
