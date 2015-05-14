@@ -1,13 +1,15 @@
 package org.bean.jandan.fragment;
 
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.bean.jandan.common.adapter.AdapterDataSource;
-import org.bean.jandan.common.page.Page;
-import org.bean.jandan.common.page.PageHelper;
+import org.bean.jandan.common.net.HttpUtil;
+import org.bean.jandan.common.util.JsonUtil;
 import org.bean.jandan.model.Result;
 import org.bean.jandan.widget.LoadListener;
 
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -19,10 +21,8 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
 
     private Class<T> mResultClass;
 
-    protected Page mPage;
-
     protected abstract String url();
-    protected abstract <E> AdapterDataSource<E> getDataSource();
+    protected abstract AdapterDataSource getDataSource();
 
     public BaseNetResultsFragment() {
         Type genericSuperclass = getClass().getGenericSuperclass();
@@ -40,7 +40,6 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
 
     @Override
     protected void onInit() {
-        mPage = new Page(url());
     }
 
     @Override
@@ -49,12 +48,18 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
             return false;
         }
         preload();
-        return request(PageHelper.createPageReq(mPage, head), mResultClass);
+        Request request = buildRequest(head);
+        return request(request, mResultClass);
+    }
+
+    protected Request buildRequest(boolean head) {
+        Request request = HttpUtil.buildReq(url(), null);;
+        return request;
     }
 
     @Override
     public void onResponse(final Response response, final T t) {
-        if (getActivity() == null) {
+        if (getActivity() == null || t == null || t.getResults() == null) {
             return;
         }
         for (Object object : t.getResults()) {
@@ -63,7 +68,11 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Boolean isFirstPage = (Boolean) response.request().tag();
+                Object tag = response.request().tag();
+                Boolean isFirstPage = true;
+                if (tag != null && tag instanceof Boolean) {
+                    isFirstPage = (Boolean) response.request().tag();
+                }
                 List res = t.getResults();
                 if (isFirstPage) {
                     getDataSource().addAll(0, res);
@@ -73,5 +82,16 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
                 getDataSource().notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public T parseResult(Response response, Class<T> classOfT) {
+        T result = null;
+        try {
+            result = JsonUtil.gson().fromJson(response.body().string(), mResultClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

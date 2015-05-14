@@ -26,7 +26,8 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
     private ActionBarDrawerToggle mToggle;
 
     protected abstract int getLayoutRes();
-    protected abstract void findViews();
+    protected void findViews() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

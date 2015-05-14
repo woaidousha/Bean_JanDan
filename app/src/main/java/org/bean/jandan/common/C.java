@@ -7,12 +7,20 @@ public interface C {
 
     interface URL {
 
-        /*无聊图*/
-        String PIC = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments";
+        interface PIC{
+            /*无聊图*/
+            String WLT = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments";
+            /*妹子图*/
+            String OOXX = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments";
 
-        /*妹子图*/
-        String OOXX = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments";
+            //评论列表
+            public static final String URL_COMMENT_LIST = "http://jandan.duoshuo.com/api/threads/listPosts" +
+                    ".json?thread_key=comment-";
+            //发表评论
+            public static final String URL_PUSH_COMMENT = "http://jandan.duoshuo.com/api/posts/create.json";
+        }
 
+        String URL_COMMENT_COUNTS = "http://jandan.duoshuo.com/api/threads/counts.json?threads=";
         /*评论列表*/
         String COMMENTS = "http://jandan.net/?oxwlxojflwblxbsapi=get_post&include=comments&id=";
 
@@ -24,7 +32,12 @@ public interface C {
                 "title,comment_count,custom_fields&custom_fields=thumb_c,views&dev=1";
 
         /*新鲜事详情*/
-        String DRESH_NEWS_DETAIL = "http://i.jandan.net/?oxwlxojflwblxbsapi=get_post&include=content&id=";
+        String FRESH_NEWS_DETAIL = "http://i.jandan.net/?oxwlxojflwblxbsapi=get_post&include=content&id=";
+
+        //评论列表
+        public static final String URL_COMMENTS = "http://jandan.net/?oxwlxojflwblxbsapi=get_post&include=comments&id=";
+        //对新鲜事发表评论
+        public static final String URL_PUSH_COMMENT ="http://jandan.net/?oxwlxojflwblxbsapi=respond.submit_comment";
 
         /*段子*/
         String DUANZI = "http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_duan_comments";
@@ -49,7 +62,8 @@ public interface C {
 
     enum Directory {
 
-        SHARE("share", false), TYPE_LOG("log", false);
+        SHARE("share", false),
+        LOG("log", false);
 
         public static final String APP_DIRECTORY_NAME = "BeanJD";
 
@@ -68,5 +82,9 @@ public interface C {
         public boolean isStorageByMD5() {
             return storageByMD5;
         }
+    }
+
+    interface Extra {
+        String TAG_COMMENT_ID = "comment_id";
     }
 }

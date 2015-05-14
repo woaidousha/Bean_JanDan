@@ -4,6 +4,8 @@ import android.text.TextUtils;
 
 import com.squareup.okhttp.Request;
 
+import org.bean.jandan.common.net.HttpUtil;
+
 /**
  * Created by liuyulong@yixin.im on 2015/5/13.
  */
@@ -22,10 +24,7 @@ public class PageHelper {
         if (TextUtils.isEmpty(url)) {
             return null;
         }
-        Request.Builder builder = new Request.Builder();
-        return builder.url(url)
-                      .tag(page.isFirstPage(url))
-                      .build();
+        return HttpUtil.buildReq(url, page.isFirstPage(url));
     }
 
     public static Request firstPageReq(Page page) {
@@ -33,6 +32,6 @@ public class PageHelper {
     }
 
     public static Request nextPageReq(Page page) {
-        return createPageReq(page, true);
+        return createPageReq(page, false);
     }
 }

@@ -65,7 +65,7 @@ class CrashSaver {
 		BufferedWriter mBufferedWriter = null;
 		try {
 			File mFile = new File(StroageUtil.getWritePath(
-                    filename + ".crashlog", C.Directory.TYPE_LOG));
+                    filename + ".crashlog", C.Directory.LOG));
 			File pFile = mFile.getParentFile();
 			if (!pFile.exists()) {// 如果文件夹不存在，则先创建文件夹
 				pFile.mkdirs();

@@ -23,4 +23,13 @@ public class HttpUtil {
         client().newCall(request)
                 .enqueue(callback);
     }
+
+    public static Request buildReq(String url, Object tag) {
+        Request.Builder builder = new Request.Builder();
+        return builder.url(url).tag(tag).build();
+    }
+
+    public static Request buildReq(String url) {
+        return buildReq(null);
+    }
 }

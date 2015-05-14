@@ -11,7 +11,7 @@ import org.bean.jandan.model.PictureResult;
 public class WltFragment extends BaseRecycleViewNetFragment<PictureResult> {
     @Override
     protected String url() {
-        return C.URL.PIC;
+        return C.URL.PIC.WLT;
     }
 
     @Override

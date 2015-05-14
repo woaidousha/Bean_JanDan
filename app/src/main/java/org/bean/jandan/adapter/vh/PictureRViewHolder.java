@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
+import org.bean.jandan.activity.CommentsActivity;
 import org.bean.jandan.activity.PictureActivity;
 import org.bean.jandan.adapter.helper.FetchImageHelper;
 import org.bean.jandan.common.util.ShareUtil;
@@ -24,6 +25,7 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
     private TextView mXX;
     private TextView mShare;
     private TextView mCommentContent;
+    private TextView mComments;
 
     public PictureRViewHolder(View mView) {
         super(mView);
@@ -38,6 +40,10 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
         mXX = (TextView) view.findViewById(R.id.xx);
         mShare = (TextView) view.findViewById(R.id.share);
         mCommentContent = (TextView) view.findViewById(R.id.comment_content);
+        mComments = (TextView) view.findViewById(R.id.comments);
+        mPicture.setOnClickListener(this);
+        mShare.setOnClickListener(this);
+        mComments.setOnClickListener(this);
     }
 
     @Override
@@ -51,19 +57,18 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
         mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mCommentContent.setText(commentContent);
         FetchImageHelper.fetchRecyclerViewImage(mPicture, item.getPicUri());
-        mPicture.setOnClickListener(this);
-        mShare.setOnClickListener(this);
-        mShare.setTag(item);
     }
 
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
-        SinglePicture picture = (SinglePicture) mData;
+        SinglePicture picture = mData;
         if (viewId == R.id.share) {
             ShareUtil.shareImage(picture);
         } else if (viewId == R.id.picture) {
             PictureActivity.start(mContext, picture.getPicUri());
+        } else if (viewId == R.id.comments) {
+            CommentsActivity.start(mContext, picture.getComment_ID());
         }
     }
 }

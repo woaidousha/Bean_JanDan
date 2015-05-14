@@ -14,4 +14,6 @@ public interface OnResultCallback<T> {
     public void onResponse(Response response, T t);
 
     public void onFailure(Request request, IOException e);
+
+    public T parseResult(Response response, Class<T> classOfT);
 }

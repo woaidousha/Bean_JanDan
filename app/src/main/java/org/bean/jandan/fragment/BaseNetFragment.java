@@ -45,6 +45,11 @@ public abstract class BaseNetFragment<T> extends Fragment implements OnResultCal
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         init();
     }
 

@@ -11,7 +11,7 @@ import org.bean.jandan.model.PictureResult;
 public class OOXXFragment extends BaseRecycleViewNetFragment<PictureResult> {
     @Override
     protected String url() {
-        return C.URL.OOXX;
+        return C.URL.PIC.OOXX;
     }
 
     @Override
