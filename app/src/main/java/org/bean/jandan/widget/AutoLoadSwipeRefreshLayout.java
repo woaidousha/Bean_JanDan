@@ -29,6 +29,9 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
             if (isRefreshing()) {
                 return;
             }
+            if (mLoadListener != null && !mLoadListener.hasMore()) {
+                return;
+            }
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             View view = layoutManager.findViewByPosition(layoutManager.getItemCount() - 1);
             if (view == null) {

@@ -57,4 +57,9 @@ public class CommentsFragment extends BaseRecycleViewNetFragment<PicCommentsResu
         }
         return result;
     }
+
+    @Override
+    public boolean hasMore() {
+        return false;
+    }
 }

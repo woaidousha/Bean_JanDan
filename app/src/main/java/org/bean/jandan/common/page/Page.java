@@ -102,4 +102,8 @@ public class Page {
             return false;
         }
     }
+
+    public boolean isLastPage() {
+        return getCurrentPage() == getTotalPage();
+    }
 }

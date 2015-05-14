@@ -59,6 +59,11 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
     }
 
     @Override
+    public boolean hasMore() {
+        return mPage.isLastPage();
+    }
+
+    @Override
     protected Request buildRequest(boolean head) {
         return PageHelper.createPageReq(mPage, head);
     }

@@ -7,4 +7,5 @@ public interface LoadListener {
 
     public void preload();
     public boolean load(boolean head);
+    public boolean hasMore();
 }
