@@ -10,7 +10,7 @@ import android.view.View;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
-import org.bean.jandan.adapter.helper.FetchImageHelper;
+import org.bean.jandan.adapter.helper.ImageFetchHelper;
 
 /**
  * Created by liuyulong@yixin.im on 2015/5/12.
@@ -54,7 +54,7 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
             finish();
             return;
         }
-        FetchImageHelper.fetchRecyclerViewImage(mPicutre, mData);
+        ImageFetchHelper.fetchRecyclerViewImage(mPicutre, mData);
     }
 
     @Override

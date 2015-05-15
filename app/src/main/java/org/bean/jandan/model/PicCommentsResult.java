@@ -42,7 +42,6 @@ public class PicCommentsResult extends Result<PicComment> {
                     author.url = authorJo.getString(Tag.TAG_AUTHOR_URL);
                     author.avatar_url = authorJo.getString(Tag.TAG_AUTHOR_AVATAR_URL);
                     comments.add(picComment);
-                    DebugLog.e("commentsize :" + comments.size());
                 } catch (Exception e) {
                     e.printStackTrace();
                     DebugLog.e(e.getMessage());

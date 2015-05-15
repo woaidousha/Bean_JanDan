@@ -49,6 +49,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
         mRecycleView.setAdapter(mAdapter);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecycleView.setLayoutManager(mLinearLayoutManager);
+        mRecycleView.setTag(url());
         mSwipeRefreshLayout.setRecyclerView(mRecycleView, null);
         mSwipeRefreshLayout.setLoadListener(this);
         load(true);
@@ -56,7 +57,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
 
     @Override
     public void preload() {
-        mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setRefresh(true, true);
     }
 
     @Override

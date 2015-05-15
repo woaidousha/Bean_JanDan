@@ -17,6 +17,8 @@ import org.bean.jandan.fragment.BaseRecycleViewNetFragment;
 
 public class MainActivity extends BaseColorActivity implements AdapterView.OnItemClickListener {
 
+    private MainMenu mSelectedMenu;
+
     private DrawerLayout mDrawerLayout;
     private ListView mListView;
 
@@ -64,24 +66,30 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
         MainMenu.initMenuFragments(getSupportFragmentManager().beginTransaction());
         MenuAdapter adapter = new MenuAdapter();
         mListView.setAdapter(adapter);
-        mListView.performItemClick(mListView.getChildAt(0), 0, 0);
+        updateSelectedMenu(MainMenu.WLT);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MainMenu menu = (MainMenu) parent.getAdapter().getItem(position);
-        menu.showMenuFragment(getSupportFragmentManager().beginTransaction());
-        mDrawerLayout.closeDrawers();
-        getToolbar().setTitle(menu.mLabelRes);
+        updateSelectedMenu(menu);
     }
 
     @Override
     public void onDoubleClick(View v) {
         int viewId = v.getId();
         if (viewId == R.id.main_tool_bar) {
-            BaseRecycleViewNetFragment fragment = (BaseRecycleViewNetFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            BaseRecycleViewNetFragment fragment = (BaseRecycleViewNetFragment) getSupportFragmentManager()
+                    .findFragmentByTag(mSelectedMenu.name());
             fragment.goToTop();
         }
+    }
+
+    public void updateSelectedMenu(MainMenu menu) {
+        this.mSelectedMenu = menu;
+        menu.showMenuFragment(getSupportFragmentManager().beginTransaction());
+        mDrawerLayout.closeDrawers();
+        getToolbar().setTitle(menu.mLabelRes);
     }
 
     class MenuAdapter extends BaseAdapter {
@@ -110,5 +118,6 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
             ((TextView) convertView).setText(getString(menuItem.mLabelRes));
             return convertView;
         }
+
     }
 }

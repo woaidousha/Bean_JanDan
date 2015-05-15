@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
-import org.bean.jandan.adapter.helper.FetchImageHelper;
+import org.bean.jandan.adapter.helper.ImageFetchHelper;
 import org.bean.jandan.model.Post;
 
 /**
@@ -43,7 +43,7 @@ public class PostRViewHolder extends RViewHolder<Post> {
         mCommentContent.setText(commentContent);
         String thumbUrl = item.getCustom_fields().getFirstThumb();
         if (!TextUtils.isEmpty(thumbUrl)) {
-            FetchImageHelper.fetchRecyclerViewImage(mPicture, Uri.parse(thumbUrl));
+            ImageFetchHelper.fetchRecyclerViewImage(mPicture, Uri.parse(thumbUrl));
         }
     }
 

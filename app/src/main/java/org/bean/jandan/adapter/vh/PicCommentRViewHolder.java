@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
-import org.bean.jandan.adapter.helper.FetchImageHelper;
+import org.bean.jandan.adapter.helper.ImageFetchHelper;
 import org.bean.jandan.model.PicComment;
 
 /**
@@ -41,7 +41,7 @@ public class PicCommentRViewHolder extends RViewHolder<PicComment> {
         mMessage.setText(item.getMessage());
         String thumbUrl = item.getAuthor().getAvatar_url();
         if (!TextUtils.isEmpty(thumbUrl)) {
-            FetchImageHelper.fetchRecyclerViewImage(mAvatar, Uri.parse(thumbUrl));
+            ImageFetchHelper.fetchRecyclerViewImage(mAvatar, Uri.parse(thumbUrl), false);
         }
     }
 

@@ -6,7 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import org.bean.jandan.common.util.DebugLog;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
@@ -18,8 +19,6 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            DebugLog.d("child count :" + recyclerView.getChildCount() + ", id: " + recyclerView.getId() + ", state:"
-                    + newState);
             if (mDelegateListener != null) {
                 mDelegateListener.onScrollStateChanged(recyclerView, newState);
             }
@@ -38,9 +37,6 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
             }
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             View view = layoutManager.findViewByPosition(layoutManager.getItemCount() - 1);
-            DebugLog.d("view position : " + (view == null ? 0 : layoutManager.getPosition(view)) + ", count :" +
-                    recyclerView
-                    .getChildCount() + ", id: " + recyclerView.getId());
             if (view == null) {
                 return;
             }
@@ -92,6 +88,24 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
         super.setRefreshing(refreshing);
     }
 
+    public void setRefresh(boolean refreshing, boolean notify) {
+        if (!notify) {
+            this.setRefreshing(refreshing);
+        } else {
+            try {
+                Method method = getClass().getSuperclass().getDeclaredMethod("setRefreshing", new Class[]{boolean.class, boolean.class});
+                method.setAccessible(true);
+                method.invoke(this, refreshing, notify);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void onRefresh() {
         if (mLoadListener != null) {
@@ -104,7 +118,6 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
     }
 
     public void goToTop() {
-        DebugLog.d("child count :" + mRecyclerView.getChildCount() + ", id: " + mRecyclerView.getId());
         int position = mRecyclerView.getChildPosition(mRecyclerView.getChildAt(0));
         if (position > 10) {
             mRecyclerView.scrollToPosition(0);

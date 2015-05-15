@@ -34,10 +34,8 @@ public class CallbackDelegate<T> implements Callback {
     @Override
     public void onResponse(Response response) throws IOException {
         try {
-            DebugLog.e(response.toString());
             Object o = callback.parseResult(response, mResultClass);
             T t = Primitives.wrap(mResultClass).cast(o);
-            DebugLog.e(t.toString());
             callback.onResponse(response, t);
             callback.onFinish();
         } catch (Exception e) {

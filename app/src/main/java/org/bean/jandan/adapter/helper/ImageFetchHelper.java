@@ -18,9 +18,9 @@ import org.bean.jandan.widget.drawable.ImageProgressBarDrawable;
 /**
  * Created by liuyulong@yixin.im on 2015/5/7.
  */
-public class FetchImageHelper {
+public class ImageFetchHelper {
 
-    public static void fetchRecyclerViewImage(SimpleDraweeView view, Uri uri) {
+    public static void fetchRecyclerViewImage(SimpleDraweeView view, Uri uri, boolean withProgress) {
         if (view == null) {
             return;
         }
@@ -36,7 +36,10 @@ public class FetchImageHelper {
                                             .build();
         view.setController(controller);
         if (view.getHierarchy() != null) {
-            ImageProgressBarDrawable drawable = new ImageProgressBarDrawable(BeanApp.getApp().getResources());
+            ImageProgressBarDrawable drawable = null;
+            if (withProgress) {
+                drawable = new ImageProgressBarDrawable(BeanApp.getApp().getResources());
+            }
             GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(BeanApp.getApp().getResources())
                     .setFadeDuration(300)
                     .setProgressBarImage(drawable)
@@ -51,6 +54,10 @@ public class FetchImageHelper {
             return ImageRequest.RequestLevel.DISK_CACHE;
         }
         return ImageRequest.RequestLevel.FULL_FETCH;
+    }
+
+    public static void fetchRecyclerViewImage(SimpleDraweeView view, Uri uri) {
+        fetchRecyclerViewImage(view, uri, true);
     }
 
 }

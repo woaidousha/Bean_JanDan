@@ -9,7 +9,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.bean.jandan.R;
 import org.bean.jandan.activity.CommentsActivity;
 import org.bean.jandan.activity.PictureActivity;
-import org.bean.jandan.adapter.helper.FetchImageHelper;
+import org.bean.jandan.adapter.helper.ImageFetchHelper;
 import org.bean.jandan.common.util.ShareUtil;
 import org.bean.jandan.model.SinglePicture;
 
@@ -56,7 +56,7 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
         String commentContent = item.getText_content();
         mCommentContent.setVisibility(TextUtils.isEmpty(commentContent) ? View.GONE : View.VISIBLE);
         mCommentContent.setText(commentContent);
-        FetchImageHelper.fetchRecyclerViewImage(mPicture, item.getPicUri());
+        ImageFetchHelper.fetchRecyclerViewImage(mPicture, item.getPicUri());
     }
 
     @Override

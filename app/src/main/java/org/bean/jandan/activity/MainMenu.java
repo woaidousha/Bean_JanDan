@@ -44,9 +44,7 @@ public enum  MainMenu {
 
     public static void initMenuFragments(FragmentTransaction transaction) {
         for (MainMenu menu : MainMenu.values()) {
-            transaction.add(R.id.fragment_container, menu.getFragment());
-        }
-        for (MainMenu menu : MainMenu.values()) {
+            transaction.add(R.id.fragment_container, menu.getFragment(), menu.name());
             transaction.hide(menu.getFragment());
         }
         transaction.commitAllowingStateLoss();
