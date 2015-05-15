@@ -4,7 +4,9 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.bean.jandan.common.adapter.AdapterDataSource;
+import org.bean.jandan.common.net.CallbackDelegate;
 import org.bean.jandan.common.net.HttpUtil;
+import org.bean.jandan.common.net.OnResultCallback;
 import org.bean.jandan.common.util.JsonUtil;
 import org.bean.jandan.model.Result;
 import org.bean.jandan.widget.LoadListener;
@@ -17,7 +19,8 @@ import java.util.List;
 /**
  * Created by liuyulong@yixin.im on 2015/5/14.
  */
-public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFragment<T> implements LoadListener {
+public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragment implements
+        OnResultCallback<T>, LoadListener {
 
     private Class<T> mResultClass;
 
@@ -52,9 +55,20 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
         return request(request, mResultClass);
     }
 
+    protected boolean request(Request request, Class<T> clazz) {
+        if (request == null) {
+            return false;
+        }
+        HttpUtil.enqueue(request, new CallbackDelegate<T>(this, clazz));
+        return true;
+    }
+
+    @Override
+    public void onFailure(Request request, IOException e) {
+    }
+
     protected Request buildRequest(boolean head) {
-        Request request = HttpUtil.buildReq(url(), null);;
-        return request;
+        return HttpUtil.buildReq(url(), null);
     }
 
     @Override
@@ -62,9 +76,7 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
         if (getActivity() == null || t == null || t.getResults() == null) {
             return;
         }
-        for (Object object : t.getResults()) {
-            getDataSource().remove(object);
-        }
+        getDataSource().merge(t.getResults());
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -79,7 +91,7 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseNetFr
                 } else {
                     getDataSource().addAll(res);
                 }
-                getDataSource().notifyDataSetChanged();
+                getDataSource().notifyDataChanged();
             }
         });
     }

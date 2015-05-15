@@ -24,6 +24,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
     protected Page mPage;
     protected CommonRecycleAdapter mAdapter;
 
+    private LinearLayoutManager mLinearLayoutManager;
     protected AutoLoadSwipeRefreshLayout mSwipeRefreshLayout;
     protected RecyclerView mRecycleView;
 
@@ -38,10 +39,6 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
     protected void findViews(View v) {
         mSwipeRefreshLayout = (AutoLoadSwipeRefreshLayout) v.findViewById(R.id.swipe_layout);
         mRecycleView = (RecyclerView) v.findViewById(R.id.recycle_view);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecycleView.setLayoutManager(linearLayoutManager);
-        mSwipeRefreshLayout.setRecyclerView(mRecycleView, null);
-        mSwipeRefreshLayout.setLoadListener(this);
     }
 
     @Override
@@ -50,6 +47,10 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
         mPage = new Page(url());
         mAdapter = configAdapter();
         mRecycleView.setAdapter(mAdapter);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mRecycleView.setLayoutManager(mLinearLayoutManager);
+        mSwipeRefreshLayout.setRecyclerView(mRecycleView, null);
+        mSwipeRefreshLayout.setLoadListener(this);
         load(true);
     }
 
@@ -60,7 +61,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
 
     @Override
     public boolean hasMore() {
-        return mPage.isLastPage();
+        return !mPage.isLastPage();
     }
 
     @Override
@@ -69,12 +70,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
     }
 
     public void goToTop() {
-        int position = mRecycleView.getChildPosition(mRecycleView.getChildAt(0));
-        if (position > 10) {
-            mRecycleView.scrollToPosition(0);
-        } else {
-            mRecycleView.smoothScrollToPosition(0);
-        }
+        mSwipeRefreshLayout.goToTop();
     }
 
     @Override

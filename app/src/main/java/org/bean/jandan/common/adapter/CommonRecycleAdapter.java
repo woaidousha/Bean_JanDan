@@ -49,11 +49,23 @@ public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter imple
         return mDataSource.addAll(data);
     }
 
-    public boolean remove(Object t) {
+    public boolean remove(T t) {
         return mDataSource.remove(t);
     }
 
     public T remove(int index) {
         return mDataSource.remove(index);
+    }
+
+    @Override
+    public void merge(List<T> t) {
+        for (T e : t) {
+            mDataSource.remove(e);
+        }
+    }
+
+    @Override
+    public void notifyDataChanged() {
+        notifyDataSetChanged();
     }
 }

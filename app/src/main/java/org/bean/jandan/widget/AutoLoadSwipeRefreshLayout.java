@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
+import org.bean.jandan.common.util.DebugLog;
+
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
@@ -16,6 +18,8 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            DebugLog.d("child count :" + recyclerView.getChildCount() + ", id: " + recyclerView.getId() + ", state:"
+                    + newState);
             if (mDelegateListener != null) {
                 mDelegateListener.onScrollStateChanged(recyclerView, newState);
             }
@@ -34,6 +38,9 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
             }
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             View view = layoutManager.findViewByPosition(layoutManager.getItemCount() - 1);
+            DebugLog.d("view position : " + (view == null ? 0 : layoutManager.getPosition(view)) + ", count :" +
+                    recyclerView
+                    .getChildCount() + ", id: " + recyclerView.getId());
             if (view == null) {
                 return;
             }
@@ -93,6 +100,16 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
             } else {
                 mLoadListener.load(true);
             }
+        }
+    }
+
+    public void goToTop() {
+        DebugLog.d("child count :" + mRecyclerView.getChildCount() + ", id: " + mRecyclerView.getId());
+        int position = mRecyclerView.getChildPosition(mRecyclerView.getChildAt(0));
+        if (position > 10) {
+            mRecyclerView.scrollToPosition(0);
+        } else {
+            mRecyclerView.smoothScrollToPosition(0);
         }
     }
 }
