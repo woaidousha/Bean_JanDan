@@ -74,6 +74,7 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
 
     @Override
     public void setOnRefreshListener(OnRefreshListener listener) {
+        mDelegateRefreshListener = listener;
     }
 
     public void setLoadListener(LoadListener loadListener) {
@@ -114,6 +115,9 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
             } else {
                 mLoadListener.load(true);
             }
+        }
+        if (mDelegateRefreshListener != null) {
+            mDelegateRefreshListener.onRefresh();
         }
     }
 

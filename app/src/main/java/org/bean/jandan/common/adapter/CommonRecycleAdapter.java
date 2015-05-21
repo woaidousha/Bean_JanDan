@@ -28,10 +28,17 @@ public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter imple
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        ((RViewHolder) viewHolder).refresh(getItem(position));
+        T t = getItem(position);
+        if (t == null) {
+            return;
+        }
+        ((RViewHolder) viewHolder).refresh(t);
     }
 
     public T getItem(int position) {
+        if (mDataSource == null || position >= mDataSource.size()) {
+            return null;
+        }
         return mDataSource.get(position);
     }
 
