@@ -1,16 +1,14 @@
 package org.bean.jandan;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;
+import com.facebook.common.logging.FLogDefaultLoggingDelegate;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import org.bean.jandan.common.C;
 import org.bean.jandan.common.crash.AppCrashHandler;
@@ -25,14 +23,6 @@ public class BeanApp extends Application {
 
     private static BeanApp sInstance;
 
-    public static RefWatcher getRefWatcher(Context context) {
-        BeanApp application = (BeanApp) context.getApplicationContext();
-        return application.refWatcher;
-    }
-
-    private RefWatcher refWatcher;
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,7 +30,6 @@ public class BeanApp extends Application {
         AppCrashHandler.getInstance(this);
         initFresco();
         StroageUtil.init();
-        refWatcher = LeakCanary.install(this);
     }
 
     public static BeanApp getApp() {
@@ -48,6 +37,7 @@ public class BeanApp extends Application {
     }
 
     public void initFresco() {
+        FLogDefaultLoggingDelegate.getInstance().setMinimumLoggingLevel(0);
         ProgressiveJpegConfig jpegConfig = new SimpleProgressiveJpegConfig();
         ImagePipelineConfig.Builder configBuilder = ImagePipelineConfig.newBuilder(this);
         DiskCacheConfig.Builder diskCacheConfig = DiskCacheConfig.newBuilder();

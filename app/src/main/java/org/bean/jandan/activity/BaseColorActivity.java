@@ -1,13 +1,15 @@
 package org.bean.jandan.activity;
 
 import android.content.res.Configuration;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -24,6 +26,8 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
     SystemBarTintManager mTintManager;
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mToggle;
+    private ViewGroup mContentView;
+    private ViewDataBinding mViewDataBinding;
 
     protected abstract int getLayoutRes();
     protected void findViews() {
@@ -44,11 +48,11 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
     public void setContentView(int layoutResID) {
         super.setContentView(R.layout.base_color_activity);
         FrameLayout activityContent = (FrameLayout) findViewById(R.id.activity_content);
-        View content = LayoutInflater.from(this).inflate(layoutResID, activityContent, true);
-        View contentView = findViewById(android.R.id.content);
-        contentView.setPadding(contentView.getPaddingLeft(), contentView.getPaddingTop() + mTintManager.getConfig()
-                                                                                                       .getStatusBarHeight(), contentView
-                .getPaddingRight(), contentView.getPaddingBottom());
+        mViewDataBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutRes(), activityContent, true);
+        mContentView = (ViewGroup) findViewById(android.R.id.content);
+        mContentView.setPadding(mContentView.getPaddingLeft(), mContentView.getPaddingTop() + mTintManager.getConfig()
+                                                                                                       .getStatusBarHeight(), mContentView
+                .getPaddingRight(), mContentView.getPaddingBottom());
         mToolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         mToolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_color));
         DoubleClickHelper.addDoubleClick(mToolbar, this);
@@ -96,5 +100,9 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
 
     @Override
     public void onDoubleClick(View v) {
+    }
+
+    public ViewDataBinding getViewDataBinding() {
+        return mViewDataBinding;
     }
 }

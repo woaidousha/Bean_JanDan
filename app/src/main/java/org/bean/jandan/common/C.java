@@ -85,6 +85,7 @@ public interface C {
     }
 
     interface Extra {
+        String TAG_SINGLE_PICTURE = "single_picture";
         String TAG_COMMENT_ID = "comment_id";
     }
 }

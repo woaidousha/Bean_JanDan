@@ -1,5 +1,6 @@
 package org.bean.jandan.common.util;
 
+import android.net.Uri;
 import android.text.TextUtils;
 
 import java.net.MalformedURLException;
@@ -41,4 +42,14 @@ public class URLUtil {
         }
     }
 
+    public static boolean isGifUrl(Uri uri) {
+        return isGifUrl(uri == null ? "" : uri.toString());
+    }
+
+    public static boolean isGifUrl(String url) {
+        if (TextUtils.isEmpty(url)) {
+            return false;
+        }
+        return url.toLowerCase().endsWith("gif");
+    }
 }

@@ -6,10 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.leakcanary.RefWatcher;
-
-import org.bean.jandan.BeanApp;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -46,11 +42,5 @@ public abstract class BaseFragment extends Fragment {
     public void onStart() {
         super.onStart();
         init();
-    }
-
-    @Override public void onDestroy() {
-        super.onDestroy();
-        RefWatcher refWatcher = BeanApp.getRefWatcher(getActivity());
-        refWatcher.watch(this);
     }
 }

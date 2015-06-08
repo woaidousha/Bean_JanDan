@@ -2,10 +2,12 @@ package org.bean.jandan.model;
 
 import org.bean.jandan.common.util.StringUtil;
 
+import java.io.Serializable;
+
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class Comment {
+public class Comment implements Serializable {
 
     protected String comment_ID;
     protected String comment_post_ID;

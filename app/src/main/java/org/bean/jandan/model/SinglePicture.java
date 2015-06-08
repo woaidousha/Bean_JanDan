@@ -3,10 +3,14 @@ package org.bean.jandan.model;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import org.bean.jandan.common.util.URLUtil;
+
+import java.io.Serializable;
+
 /**
  * Created by liuyulong@yixin.im on 2015/4/29.
  */
-public class SinglePicture extends Comment {
+public class SinglePicture extends Comment implements Serializable {
 
     private String pic;
 
@@ -42,10 +46,7 @@ public class SinglePicture extends Comment {
     }
 
     public boolean isGif() {
-        if (TextUtils.isEmpty(pic)) {
-            return false;
-        }
-        return pic.toLowerCase().endsWith("gif");
+        return URLUtil.isGifUrl(getPic());
     }
 
     @Override

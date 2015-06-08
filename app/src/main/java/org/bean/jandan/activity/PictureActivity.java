@@ -11,6 +11,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.bean.jandan.R;
 import org.bean.jandan.adapter.helper.ImageFetchHelper;
+import org.bean.jandan.common.C;
+import org.bean.jandan.common.util.URLUtil;
+import org.bean.jandan.model.SinglePicture;
 
 /**
  * Created by liuyulong@yixin.im on 2015/5/12.
@@ -26,14 +29,26 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
         context.startActivity(intent);
     }
 
+    public static void start(Context context, SinglePicture picture) {
+        Intent intent = new Intent(context, PictureActivity.class);
+        intent.putExtra(C.Extra.TAG_SINGLE_PICTURE, picture);
+        if (!(context instanceof Activity)) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
+    }
+
     private SimpleDraweeView mPicutre;
 
     private Uri mData;
+    private SinglePicture mSinglePicture;
+    private boolean mIsGif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         processIntent();
+        loadPicture();
     }
 
     @Override
@@ -50,10 +65,25 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
     private void processIntent() {
         Intent intent = getIntent();
         mData = intent.getData();
-        if (mData == null) {
+        mSinglePicture = (SinglePicture) intent.getSerializableExtra(C.Extra.TAG_SINGLE_PICTURE);
+        if (mData == null && mSinglePicture == null) {
             finish();
             return;
         }
+        if (mData == null) {
+            mData = mSinglePicture.getPicUri();
+        }
+
+        mIsGif = URLUtil.isGifUrl(mData);
+
+        hideView();
+    }
+
+    private void hideView() {
+        mPicutre.setVisibility(mIsGif ? View.VISIBLE : View.GONE);
+    }
+
+    private void loadPicture() {
         ImageFetchHelper.fetchRecyclerViewImage(mPicutre, mData);
     }
 
