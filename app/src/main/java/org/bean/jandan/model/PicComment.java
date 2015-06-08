@@ -1,9 +1,11 @@
 package org.bean.jandan.model;
 
+import org.bean.jandan.common.cache.Cacheable;
+
 /**
  * Created by liuyulong@yixin.im on 2015/5/14.
  */
-public class PicComment {
+public class PicComment implements Cacheable {
 
     String message;
     String created_at;

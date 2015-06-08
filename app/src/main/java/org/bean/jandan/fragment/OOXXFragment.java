@@ -16,6 +16,6 @@ public class OOXXFragment extends BaseRecycleViewNetFragment<PictureResult> {
 
     @Override
     protected CommonRecycleAdapter configAdapter() {
-        return new PictureAdapter(getActivity());
+        return new PictureAdapter(getActivity(), getDataSource());
     }
 }

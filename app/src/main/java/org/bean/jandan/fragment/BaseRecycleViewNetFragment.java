@@ -23,6 +23,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
 
     protected Page mPage;
     protected CommonRecycleAdapter mAdapter;
+    private AdapterDataSource mDataSource;
 
     private LinearLayoutManager mLinearLayoutManager;
     protected AutoLoadSwipeRefreshLayout mSwipeRefreshLayout;
@@ -45,6 +46,7 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
     protected void onInit() {
         super.onInit();
         mPage = new Page(url());
+        mDataSource = new AdapterDataSource(url());
         mAdapter = configAdapter();
         mRecycleView.setAdapter(mAdapter);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
@@ -86,6 +88,6 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
 
     @Override
     protected AdapterDataSource getDataSource() {
-        return mAdapter;
+        return mDataSource;
     }
 }

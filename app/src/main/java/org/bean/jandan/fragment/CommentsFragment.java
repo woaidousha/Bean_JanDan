@@ -33,7 +33,7 @@ public class CommentsFragment extends BaseRecycleViewNetFragment<PicCommentsResu
 
     @Override
     protected CommonRecycleAdapter configAdapter() {
-        return new PicCommentsAdapter(getActivity());
+        return new PicCommentsAdapter(getActivity(), getDataSource());
     }
 
     @Override

@@ -16,7 +16,7 @@ public class JokeFragment extends BaseRecycleViewNetFragment<JokeResult> {
 
     @Override
     protected JokeAdapter configAdapter() {
-        return new JokeAdapter(getActivity());
+        return new JokeAdapter(getActivity(), getDataSource());
     }
 
 }

@@ -15,7 +15,7 @@ public class NewFreshFragment extends BaseRecycleViewNetFragment<PostsResult> {
 
     @Override
     protected PostsAdapter configAdapter() {
-        return new PostsAdapter(getActivity());
+        return new PostsAdapter(getActivity(), getDataSource());
     }
 
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import org.bean.jandan.R;
 import org.bean.jandan.adapter.vh.PicCommentRViewHolder;
+import org.bean.jandan.common.adapter.AdapterDataSource;
 import org.bean.jandan.common.adapter.CommonRecycleAdapter;
 import org.bean.jandan.model.PicComment;
 
@@ -15,8 +16,8 @@ import org.bean.jandan.model.PicComment;
  */
 public class PicCommentsAdapter extends CommonRecycleAdapter<PicComment> {
 
-    public PicCommentsAdapter(Context context) {
-        super(context);
+    public PicCommentsAdapter(Context context, AdapterDataSource dataSource) {
+        super(context, dataSource);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package org.bean.jandan.model;
 
+import org.bean.jandan.common.cache.Cacheable;
+
 /**
  * Created by liuyulong@yixin.im on 2015/4/28.
  */
-public abstract class PageResult<T> extends Result<T> {
+public abstract class PageResult<T extends Cacheable> extends Result<T> {
 
     private int current_page;
     private int total_comments;

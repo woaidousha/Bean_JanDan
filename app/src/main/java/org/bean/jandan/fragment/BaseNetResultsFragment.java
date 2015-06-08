@@ -1,9 +1,14 @@
 package org.bean.jandan.fragment;
 
+import android.app.Activity;
+
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.bean.jandan.common.adapter.AdapterDataSource;
+import org.bean.jandan.common.cache.CacheManager;
+import org.bean.jandan.common.cache.Cacheable;
+import org.bean.jandan.common.cache.DataObserver;
 import org.bean.jandan.common.net.CallbackDelegate;
 import org.bean.jandan.common.net.HttpUtil;
 import org.bean.jandan.common.net.OnResultCallback;
@@ -20,7 +25,7 @@ import java.util.List;
  * Created by liuyulong@yixin.im on 2015/5/14.
  */
 public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragment implements
-        OnResultCallback<T>, LoadListener {
+        OnResultCallback<T>, LoadListener, DataObserver<String> {
 
     private Class<T> mResultClass;
 
@@ -43,6 +48,18 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
 
     @Override
     protected void onInit() {
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        CacheManager.get().cache().registerDataObserver(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        CacheManager.get().cache().unregisterDataObserver(this);
     }
 
     @Override
@@ -76,24 +93,18 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
         if (getActivity() == null || t == null || t.getResults() == null) {
             return;
         }
-        getDataSource().merge(t.getResults());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Object tag = response.request().tag();
-                Boolean isFirstPage = true;
-                if (tag != null && tag instanceof Boolean) {
-                    isFirstPage = (Boolean) response.request().tag();
-                }
-                List res = t.getResults();
-                if (isFirstPage) {
-                    getDataSource().addAll(0, res);
-                } else {
-                    getDataSource().addAll(res);
-                }
-                getDataSource().notifyDataChanged();
-            }
-        });
+
+        Object tag = response.request().tag();
+        Boolean isFirstPage = true;
+        if (tag != null && tag instanceof Boolean) {
+            isFirstPage = (Boolean) response.request().tag();
+        }
+        List<Cacheable> res = t.getResults();
+        if (isFirstPage) {
+            CacheManager.get().cache().appendTo(url(), res);
+        } else {
+            CacheManager.get().cache().append(url(), res);
+        }
     }
 
     @Override
@@ -105,5 +116,20 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public void onDataChange(String s) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getDataSource().notifyDataChanged();
+            }
+        });
+    }
+
+    @Override
+    public String getKey() {
+        return url();
     }
 }

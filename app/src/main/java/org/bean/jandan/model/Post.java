@@ -1,11 +1,12 @@
 package org.bean.jandan.model;
 
+import org.bean.jandan.common.cache.Cacheable;
 import org.bean.jandan.common.util.StringUtil;
 
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class Post {
+public class Post implements Cacheable {
 
     String id;
     String url;

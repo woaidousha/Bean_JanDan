@@ -1,5 +1,6 @@
 package org.bean.jandan.model;
 
+import org.bean.jandan.common.cache.Cacheable;
 import org.bean.jandan.common.util.StringUtil;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class Comment implements Serializable {
+public class Comment implements Serializable, Cacheable {
 
     protected String comment_ID;
     protected String comment_post_ID;

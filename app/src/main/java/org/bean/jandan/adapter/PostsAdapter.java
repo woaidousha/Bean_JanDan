@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import org.bean.jandan.R;
 import org.bean.jandan.adapter.vh.PostRViewHolder;
+import org.bean.jandan.common.adapter.AdapterDataSource;
 import org.bean.jandan.common.adapter.CommonRecycleAdapter;
 import org.bean.jandan.model.Post;
 
@@ -15,8 +16,8 @@ import org.bean.jandan.model.Post;
  */
 public class PostsAdapter extends CommonRecycleAdapter<Post> {
 
-    public PostsAdapter(Context context) {
-        super(context);
+    public PostsAdapter(Context context, AdapterDataSource dataSource) {
+        super(context, dataSource);
     }
 
     @Override

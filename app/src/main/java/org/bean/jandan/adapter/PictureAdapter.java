@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import org.bean.jandan.R;
+import org.bean.jandan.common.adapter.AdapterDataSource;
 import org.bean.jandan.common.adapter.CommonRecycleAdapter;
 import org.bean.jandan.adapter.vh.PictureRViewHolder;
 import org.bean.jandan.model.SinglePicture;
@@ -15,8 +16,8 @@ import org.bean.jandan.model.SinglePicture;
  */
 public class PictureAdapter extends CommonRecycleAdapter<SinglePicture> {
 
-    public PictureAdapter(Context context) {
-        super(context);
+    public PictureAdapter(Context context, AdapterDataSource dataSource) {
+        super(context, dataSource);
     }
 
     @Override

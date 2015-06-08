@@ -4,22 +4,20 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import org.bean.jandan.adapter.vh.RViewHolder;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.bean.jandan.common.content.DataSource;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/30.
  */
-public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter implements
-        AdapterDataSource<T> {
+public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<T> mDataSource;
+    private DataSource mDataSource;
 
-    public CommonRecycleAdapter(Context context) {
+    public CommonRecycleAdapter(Context context, AdapterDataSource dataSource) {
         this.mContext = context;
-        this.mDataSource = new ArrayList<>();
+        dataSource.setAdapter(this);
+        this.mDataSource = dataSource;
     }
 
     public Context getContext() {
@@ -36,43 +34,14 @@ public abstract class CommonRecycleAdapter<T> extends RecyclerView.Adapter imple
     }
 
     public T getItem(int position) {
-        if (mDataSource == null || position >= mDataSource.size()) {
+        if (mDataSource.getData() == null || position >= mDataSource.getData().size()) {
             return null;
         }
-        return mDataSource.get(position);
+        return (T) mDataSource.getData().get(position);
     }
 
     @Override
     public int getItemCount() {
-        return mDataSource == null ? 0 : mDataSource.size();
-    }
-
-
-    public boolean addAll(int index, List<T> data) {
-        return mDataSource.addAll(index, data);
-    }
-
-    public boolean addAll(List<T> data) {
-        return mDataSource.addAll(data);
-    }
-
-    public boolean remove(T t) {
-        return mDataSource.remove(t);
-    }
-
-    public T remove(int index) {
-        return mDataSource.remove(index);
-    }
-
-    @Override
-    public void merge(List<T> t) {
-        for (T e : t) {
-            mDataSource.remove(e);
-        }
-    }
-
-    @Override
-    public void notifyDataChanged() {
-        notifyDataSetChanged();
+        return mDataSource.getData() == null ? 0 : mDataSource.getData().size();
     }
 }

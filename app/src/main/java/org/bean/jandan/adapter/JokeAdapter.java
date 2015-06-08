@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import org.bean.jandan.R;
 import org.bean.jandan.adapter.vh.JokeRViewHolder;
+import org.bean.jandan.common.adapter.AdapterDataSource;
 import org.bean.jandan.common.adapter.CommonRecycleAdapter;
 import org.bean.jandan.model.Comment;
 
@@ -15,8 +16,8 @@ import org.bean.jandan.model.Comment;
  */
 public class JokeAdapter extends CommonRecycleAdapter<Comment> {
 
-    public JokeAdapter(Context context) {
-        super(context);
+    public JokeAdapter(Context context, AdapterDataSource dataSource) {
+        super(context, dataSource);
     }
 
     @Override
