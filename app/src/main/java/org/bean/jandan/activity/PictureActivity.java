@@ -75,12 +75,6 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
         }
 
         mIsGif = URLUtil.isGifUrl(mData);
-
-        hideView();
-    }
-
-    private void hideView() {
-        mPicutre.setVisibility(mIsGif ? View.VISIBLE : View.GONE);
     }
 
     private void loadPicture() {

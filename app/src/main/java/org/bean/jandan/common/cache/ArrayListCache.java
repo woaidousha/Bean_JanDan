@@ -9,25 +9,25 @@ import java.util.List;
 public class ArrayListCache extends Cache<String, List<Cacheable>> {
 
     public void appendTo(String key, List<Cacheable> values) {
-        List<Cacheable> v = get(key);
-        if (v == null) {
-            v = new ArrayList<>();
+        List<Cacheable> old = get(key);
+        if (old == null) {
+            old = new ArrayList<>();
         } else {
-            merge(v, values);
+            old = merge(old, values);
         }
-        v.addAll(0, values);
-        put(key, v);
+        old.addAll(0, values);
+        put(key, old);
     }
 
     public void append(String key, List<Cacheable> values) {
-        List<Cacheable> v = get(key);
-        if (v == null) {
-            v = new ArrayList<>();
+        List<Cacheable> old = get(key);
+        if (old == null) {
+            old = new ArrayList<>();
         } else {
-            merge(v, values);
+            old = merge(old, values);
         }
-        v.addAll(0, values);
-        put(key, v);
+        old.addAll(values);
+        put(key, old);
     }
 
     private List<Cacheable> merge(List<Cacheable> old, List<Cacheable> values) {
