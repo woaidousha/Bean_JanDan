@@ -43,4 +43,8 @@ public abstract class BaseFragment extends Fragment {
         super.onStart();
         init();
     }
+
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+    }
 }

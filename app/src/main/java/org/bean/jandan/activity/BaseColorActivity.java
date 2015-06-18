@@ -49,14 +49,14 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
         super.setContentView(R.layout.base_color_activity);
         FrameLayout activityContent = (FrameLayout) findViewById(R.id.activity_content);
         mViewDataBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutRes(), activityContent, true);
-        mContentView = (ViewGroup) findViewById(android.R.id.content);
-        mContentView.setPadding(mContentView.getPaddingLeft(), mContentView.getPaddingTop() + mTintManager.getConfig()
-                                                                                                       .getStatusBarHeight(), mContentView
-                .getPaddingRight(), mContentView.getPaddingBottom());
         mToolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         mToolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_bar_color));
         DoubleClickHelper.addDoubleClick(mToolbar, this);
         setSupportActionBar(mToolbar);
+        mContentView = (ViewGroup) findViewById(android.R.id.content);
+        int paddingTop = mContentView.getPaddingTop() + mTintManager.getConfig().getStatusBarHeight();
+        mContentView.setPadding(mContentView.getPaddingLeft(), paddingTop, mContentView
+                .getPaddingRight(), mContentView.getPaddingBottom());
     }
 
     @Override
@@ -75,6 +75,9 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
                     onBackPressed();
                 }
             });
+        }
+        if (!showToolBar()) {
+            mToolbar.setVisibility(View.GONE);
         }
     }
 
@@ -104,5 +107,9 @@ public abstract class BaseColorActivity extends ActionBarActivity implements OnD
 
     public ViewDataBinding getViewDataBinding() {
         return mViewDataBinding;
+    }
+
+    public boolean showToolBar() {
+        return true;
     }
 }

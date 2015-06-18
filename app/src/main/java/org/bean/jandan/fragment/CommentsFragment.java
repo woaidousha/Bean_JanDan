@@ -47,14 +47,10 @@ public class CommentsFragment extends BaseRecycleViewNetFragment<PicCommentsResu
     }
 
     @Override
-    public PicCommentsResult parseResult(Response response, Class<PicCommentsResult> classOfT) {
+    public PicCommentsResult parseResult(Response response, Class<PicCommentsResult> classOfT) throws IOException {
         PicCommentsResult result = null;
-        try {
-            String json = response.body().string();
-            result = PicCommentsResult.fromJson(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String json = response.body().string();
+        result = PicCommentsResult.fromJson(json);
         return result;
     }
 

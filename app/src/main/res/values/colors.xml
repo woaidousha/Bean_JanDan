@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <drawable name="status_bar_color">#cc08b5d0</drawable>
-    <drawable name="action_bar_color">#ff08b5d0</drawable>
+    <drawable name="action_bar_color">#cc08b5d0</drawable>
 
     <color name="drawer_layout_scrim_color">#00000000</color>
 
@@ -13,6 +13,8 @@
     <color name="rainbow_green">#8eac00</color>
     <color name="rainbow_blue">#127a97</color>
     <color name="rainbow_purple">#452b72</color>
+
+    <color name="photo_tint">#7f101010</color>
 
     <integer-array name="rainbow">
         <item>@color/rainbow_red</item>

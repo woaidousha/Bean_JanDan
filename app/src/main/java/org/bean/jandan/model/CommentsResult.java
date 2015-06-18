@@ -17,4 +17,10 @@ public abstract class CommentsResult<E, R extends Comment> extends PageResult<R>
         this.comments = comments;
     }
 
+    @Override
+    public String toString() {
+        return "CommentsResult{" +
+                "comments=" + comments +
+                "} " + super.toString();
+    }
 }

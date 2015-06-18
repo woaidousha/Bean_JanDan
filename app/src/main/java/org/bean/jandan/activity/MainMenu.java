@@ -3,6 +3,7 @@ package org.bean.jandan.activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import org.bean.jandan.BeanApp;
 import org.bean.jandan.R;
 import org.bean.jandan.fragment.JokeFragment;
 import org.bean.jandan.fragment.NewFreshFragment;
@@ -27,6 +28,10 @@ public enum  MainMenu {
     MainMenu(int labelRes, Class<? extends Fragment> clazz) {
         this.mLabelRes = labelRes;
         this.mFragmentClazz = clazz;
+    }
+
+    public String getLabel() {
+        return BeanApp.getApp().getString(mLabelRes);
     }
 
     public Fragment getFragment() {

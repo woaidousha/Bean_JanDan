@@ -53,4 +53,16 @@ public abstract class PageResult<T extends Cacheable> extends Result<T> {
     public void setPages(int pages) {
         this.pages = pages;
     }
+
+    @Override
+    public String toString() {
+        return "PageResult{" +
+                "current_page=" + current_page +
+                ", total_comments=" + total_comments +
+                ", page_count=" + page_count +
+                ", count=" + count +
+                ", count_total=" + count_total +
+                ", pages=" + pages +
+                "} " + super.toString();
+    }
 }

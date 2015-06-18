@@ -17,4 +17,5 @@
     <string name="button_text_xx">XX  %s</string>
     <string name="button_text_comments">Comments</string>
     <string name="button_text_share">Share</string>
+    <string name="action_switch_mode">Switch Mode</string>
 </resources>

@@ -83,7 +83,7 @@ public class MainActivity extends BaseColorActivity implements AdapterView.OnIte
         int viewId = v.getId();
         if (viewId == R.id.main_tool_bar) {
             BaseRecycleViewNetFragment fragment = (BaseRecycleViewNetFragment) getSupportFragmentManager()
-                    .findFragmentByTag(mSelectedMenu.name());
+                    .findFragmentByTag(String.valueOf(mSelectedMenu.ordinal()));
             fragment.goToTop();
         }
     }

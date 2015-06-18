@@ -39,18 +39,24 @@ public class Cache<K, V> {
         if (observer == null) {
             return;
         }
-        ArrayList<DataObserver<K>> observers = mObservers.get(observer.getKey());
+        K key = observer.getKey();
+        ArrayList<DataObserver<K>> observers = mObservers.get(key);
         if (observers == null) {
             observers = new ArrayList<>();
         }
         observers.remove(observer);
         observers.add(observer);
+        mObservers.put(key, observers);
     }
 
     public void unregisterDataObserver(DataObserver<K> observer) {
-        ArrayList<DataObserver<K>> observers = mObservers.get(observer.getKey());
+        K key = observer.getKey();
+        ArrayList<DataObserver<K>> observers = mObservers.get(key);
         if (observers != null) {
             observers.remove(observer);
+            if (observers.size() == 0) {
+                mObservers.remove(key);
+            }
         }
     }
 

@@ -19,4 +19,11 @@ public abstract class Result<T extends Cacheable> {
     }
 
     public abstract List<T> getResults();
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "status='" + status + '\'' +
+                '}';
+    }
 }

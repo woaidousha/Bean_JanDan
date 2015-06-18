@@ -33,14 +33,15 @@ public class CallbackDelegate<T> implements Callback {
 
     @Override
     public void onResponse(Response response) throws IOException {
+        DebugLog.d(response.toString());
         try {
             Object o = callback.parseResult(response, mResultClass);
+            DebugLog.d("parse : " + o.toString());
             T t = Primitives.wrap(mResultClass).cast(o);
             callback.onResponse(response, t);
             callback.onFinish();
         } catch (Exception e) {
-            e.printStackTrace();
-            DebugLog.e(e.getMessage());
+            DebugLog.e(e.toString());
         }
     }
 }

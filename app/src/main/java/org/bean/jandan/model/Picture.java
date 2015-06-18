@@ -1,6 +1,7 @@
 package org.bean.jandan.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by liuyulong@yixin.im on 2015/4/27.
@@ -28,5 +29,12 @@ public class Picture extends Comment {
             pictures.add(singlePicture);
         }
         return pictures;
+    }
+
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "pics=" + Arrays.toString(pics) +
+                "} " + super.toString();
     }
 }

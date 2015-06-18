@@ -1,6 +1,6 @@
 package org.bean.jandan.fragment;
 
-import android.app.Activity;
+import android.os.Bundle;
 
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -12,6 +12,7 @@ import org.bean.jandan.common.cache.DataObserver;
 import org.bean.jandan.common.net.CallbackDelegate;
 import org.bean.jandan.common.net.HttpUtil;
 import org.bean.jandan.common.net.OnResultCallback;
+import org.bean.jandan.common.util.DebugLog;
 import org.bean.jandan.common.util.JsonUtil;
 import org.bean.jandan.model.Result;
 import org.bean.jandan.widget.LoadListener;
@@ -51,8 +52,8 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         CacheManager.get().cache().registerDataObserver(this);
     }
 
@@ -108,21 +109,18 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
     }
 
     @Override
-    public T parseResult(Response response, Class<T> classOfT) {
+    public T parseResult(Response response, Class<T> classOfT) throws IOException {
         T result = null;
-        try {
-            result = JsonUtil.gson().fromJson(response.body().string(), mResultClass);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        result = JsonUtil.gson().fromJson(response.body().charStream(), mResultClass);
         return result;
     }
 
     @Override
-    public void onDataChange(String s) {
+    public void onDataChange(final String s) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                DebugLog.d("s : " + s);
                 getDataSource().notifyDataChanged();
             }
         });

@@ -8,6 +8,9 @@ import org.bean.jandan.BuildConfig;
  * Created by liuyulong@yixin.im on 2015/4/28.
  */
 public class DebugLog {
+
+    private static final String TAG = "DebugLog";
+
     static String className;
     static String methodName;
     static int lineNumber;
@@ -49,7 +52,7 @@ public class DebugLog {
 
         // Throwable instance must be created before any methods
         getMethodNames(new Throwable().getStackTrace());
-        Log.e(className, createLog(message));
+        Log.e(TAG + ">" + className, createLog(message));
     }
 
     public static void i(String message) {
@@ -57,7 +60,7 @@ public class DebugLog {
             return;
 
         getMethodNames(new Throwable().getStackTrace());
-        Log.i(className, createLog(message));
+        Log.i(TAG + ">" + className, createLog(message));
     }
 
     public static void d(String message) {
@@ -65,7 +68,7 @@ public class DebugLog {
             return;
 
         getMethodNames(new Throwable().getStackTrace());
-        Log.d(className, createLog(message));
+        Log.d(TAG + ">" + className, createLog(message));
     }
 
     public static void v(String message) {
@@ -73,7 +76,7 @@ public class DebugLog {
             return;
 
         getMethodNames(new Throwable().getStackTrace());
-        Log.v(className, createLog(message));
+        Log.v(TAG + ">" + className, createLog(message));
     }
 
     public static void w(String message) {
@@ -81,7 +84,7 @@ public class DebugLog {
             return;
 
         getMethodNames(new Throwable().getStackTrace());
-        Log.w(className, createLog(message));
+        Log.w(TAG + ">" + className, createLog(message));
     }
 
     public static void wtf(String message) {
@@ -89,7 +92,7 @@ public class DebugLog {
             return;
 
         getMethodNames(new Throwable().getStackTrace());
-        Log.wtf(className, createLog(message));
+        Log.wtf(TAG + ">" + className, createLog(message));
     }
 
 }

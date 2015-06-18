@@ -1,10 +1,13 @@
 package org.bean.jandan.activity;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.transition.Transition;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -85,6 +88,33 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == mPicutre) {
             finish();
+        }
+    }
+
+    class TransitionAdapter implements Transition.TransitionListener {
+        @Override
+        public void onTransitionStart(Transition transition) {
+
+        }
+
+        @Override
+        public void onTransitionEnd(Transition transition) {
+
+        }
+
+        @Override
+        public void onTransitionCancel(Transition transition) {
+
+        }
+
+        @Override
+        public void onTransitionPause(Transition transition) {
+
+        }
+
+        @Override
+        public void onTransitionResume(Transition transition) {
+
         }
     }
 }
