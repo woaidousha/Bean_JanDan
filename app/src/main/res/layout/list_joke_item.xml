@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="0dp"
     android:orientation="vertical"
-    app:cardCornerRadius="0dp"
-    app:contentPadding="5dp">
+    app:cardCornerRadius="1dp"
+    app:contentPadding="@dimen/card_view_content_padding">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/list_title_layout_height"
+            android:padding="@dimen/list_title_layout_padding">
 
             <TextView
                 android:id="@+id/author"
@@ -44,6 +45,9 @@
         <TextView
             android:id="@+id/text_content"
             style="@style/Base.TextAppearance.AppCompat.Small"
+            android:background="@color/content_view_default_background"
+            android:textColor="@color/joke_text_color"
+            android:padding="@dimen/joke_text_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|left"/>

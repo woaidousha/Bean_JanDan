@@ -5,10 +5,18 @@
 
     <dimen name="container_layout_padding">3dp</dimen>
 
+    <dimen name="card_view_content_padding">0dp</dimen>
+
     <dimen name="list_pic_min_height">250dp</dimen>
     <dimen name="list_pic_max_height">300dp</dimen>
     <dimen name="pic_list_item_height">300dp</dimen>
+    <dimen name="vote_layout_height">30dp</dimen>
+    <dimen name="vote_layout_divider_width">10dp</dimen>
     <dimen name="list_item_widget_margin">10dp</dimen>
+    <dimen name="list_title_layout_padding">5dp</dimen>
+    <dimen name="list_title_layout_height">35dp</dimen>
+    
+    <dimen name="joke_text_padding">5dp</dimen>
 
     <dimen name="menu_item_height">35dp</dimen>
 

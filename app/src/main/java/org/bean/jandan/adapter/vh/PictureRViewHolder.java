@@ -2,6 +2,7 @@ package org.bean.jandan.adapter.vh;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -23,9 +24,9 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
     private TextView mDate;
     private TextView mOO;
     private TextView mXX;
-    private TextView mShare;
+    private ImageView mShare;
     private TextView mCommentContent;
-    private TextView mComments;
+    private ImageView mComments;
 
     public PictureRViewHolder(View mView) {
         super(mView);
@@ -38,9 +39,9 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
         mDate = (TextView) view.findViewById(R.id.date);
         mOO = (TextView) view.findViewById(R.id.oo);
         mXX = (TextView) view.findViewById(R.id.xx);
-        mShare = (TextView) view.findViewById(R.id.share);
+        mShare = (ImageView) view.findViewById(R.id.share);
         mCommentContent = (TextView) view.findViewById(R.id.comment_content);
-        mComments = (TextView) view.findViewById(R.id.comments);
+        mComments = (ImageView) view.findViewById(R.id.comments);
         mPicture.setOnClickListener(this);
         mShare.setOnClickListener(this);
         mComments.setOnClickListener(this);

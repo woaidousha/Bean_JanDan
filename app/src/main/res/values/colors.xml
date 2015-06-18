@@ -6,7 +6,7 @@
     <color name="drawer_layout_scrim_color">#00000000</color>
 
     <color name="loading_draw_color">#fffdf237</color>
-    <color name="image_view_default_background">#ff999999</color>
+    <color name="content_view_default_background">#55999999</color>
 
     <color name="rainbow_red">#bf0c43</color>
     <color name="rainbow_yellow">#f9ba15</color>
@@ -15,6 +15,10 @@
     <color name="rainbow_purple">#452b72</color>
 
     <color name="photo_tint">#7f101010</color>
+
+    <color name="vote_layout_bg">#9315bdff</color>
+    <color name="vote_text_color">#000000</color>
+    <color name="joke_text_color">#000000</color>
 
     <integer-array name="rainbow">
         <item>@color/rainbow_red</item>
