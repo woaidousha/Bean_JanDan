@@ -46,6 +46,10 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
         return mRecycleView;
     }
 
+    public RecyclerView.OnScrollListener getOnScrollListener() {
+        return mSwipeRefreshLayout.getOnScrollListener();
+    }
+
     @Override
     protected void onInit() {
         super.onInit();

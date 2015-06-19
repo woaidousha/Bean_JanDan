@@ -47,7 +47,7 @@ public class Main2Activity extends BaseColorActivity implements View.OnClickList
 
     private void attachFab() {
         BaseRecycleViewNetFragment fragment = (BaseRecycleViewNetFragment) mAdapter.getItem(mViewPager.getCurrentItem());
-        mFab.attachToRecyclerView(fragment.getRecycleView());
+        mFab.attachToRecyclerView(fragment.getRecycleView(), null, fragment.getOnScrollListener());
     }
 
     @Override

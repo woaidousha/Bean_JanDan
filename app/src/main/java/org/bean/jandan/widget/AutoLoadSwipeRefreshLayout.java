@@ -72,6 +72,10 @@ public class AutoLoadSwipeRefreshLayout extends SwipeRefreshLayout implements Sw
         mRecyclerView.setOnScrollListener(mOnScrollListener);
     }
 
+    public RecyclerView.OnScrollListener getOnScrollListener() {
+        return mOnScrollListener;
+    }
+
     @Override
     public void setOnRefreshListener(OnRefreshListener listener) {
         mDelegateRefreshListener = listener;
