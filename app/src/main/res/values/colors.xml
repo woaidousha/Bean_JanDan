@@ -29,4 +29,8 @@
         <item>@color/rainbow_blue</item>
         <item>@color/rainbow_purple</item>
     </integer-array>
+
+    <color name="float_button_normal">#5508b5d0</color>
+    <color name="float_button_pressed">#1108b5d0</color>
+    <color name="float_button_ripple">#EEFFFFFF</color>
 </resources>

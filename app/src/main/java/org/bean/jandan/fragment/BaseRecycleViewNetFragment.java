@@ -42,6 +42,10 @@ public abstract class BaseRecycleViewNetFragment<T extends Result> extends BaseN
         mRecycleView = (RecyclerView) v.findViewById(R.id.recycle_view);
     }
 
+    public RecyclerView getRecycleView() {
+        return mRecycleView;
+    }
+
     @Override
     protected void onInit() {
         super.onInit();
