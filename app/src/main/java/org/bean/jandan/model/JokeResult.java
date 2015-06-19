@@ -8,7 +8,7 @@ import java.util.List;
 public class JokeResult extends CommentsResult<Comment, Comment> {
 
     @Override
-    public List<Comment> getResults() {
+    public List<Comment> transfor() {
         return getComments();
     }
 }

@@ -6,7 +6,7 @@ import org.bean.jandan.common.util.StringUtil;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class Post implements Cacheable {
+public class Post implements Cacheable<String> {
 
     String id;
     String url;
@@ -16,6 +16,8 @@ public class Post implements Cacheable {
     Author author;
     int comment_count;
     CustomFields custom_fields;
+
+    private String baseKey;
 
     public String getId() {
         return id;
@@ -79,6 +81,16 @@ public class Post implements Cacheable {
 
     public void setCustom_fields(CustomFields custom_fields) {
         this.custom_fields = custom_fields;
+    }
+
+    @Override
+    public void setBaseKey(String key) {
+        this.baseKey = key;
+    }
+
+    @Override
+    public String getBaseKey() {
+        return baseKey;
     }
 
     class Tags {

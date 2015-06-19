@@ -67,7 +67,7 @@ public class PictureRViewHolder extends RViewHolder<SinglePicture> implements Vi
         if (viewId == R.id.share) {
             ShareUtil.shareImage(picture);
         } else if (viewId == R.id.picture) {
-            PictureActivity.start(mContext, picture.getPicUri());
+            PictureActivity.start(mContext, picture);
         } else if (viewId == R.id.comments) {
             CommentsActivity.start(mContext, picture.getComment_ID());
         }

@@ -18,7 +18,7 @@ public class PostsResult extends PageResult<Post> {
     }
 
     @Override
-    public List<Post> getResults() {
+    public List<Post> transfor() {
         return posts;
     }
 }

@@ -91,7 +91,7 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
 
     @Override
     public void onResponse(final Response response, final T t) {
-        if (getActivity() == null || t == null || t.getResults() == null) {
+        if (getActivity() == null || t == null || t.transfor() == null) {
             return;
         }
 
@@ -100,7 +100,7 @@ public abstract class BaseNetResultsFragment<T extends Result> extends BaseFragm
         if (tag != null && tag instanceof Boolean) {
             isFirstPage = (Boolean) response.request().tag();
         }
-        List<Cacheable> res = t.getResults();
+        List<Cacheable> res = t.getResult(url());
         if (isFirstPage) {
             CacheManager.get().cache().appendTo(url(), res);
         } else {

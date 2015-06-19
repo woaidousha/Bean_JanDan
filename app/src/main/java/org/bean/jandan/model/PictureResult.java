@@ -9,7 +9,7 @@ import java.util.List;
 public class PictureResult extends CommentsResult<Picture, SinglePicture> {
 
     @Override
-    public List<SinglePicture> getResults() {
+    public List<SinglePicture> transfor() {
         ArrayList<SinglePicture> pictures = new ArrayList<>();
         for (Picture picture : getComments()) {
             pictures.addAll(picture.toSinglePictures());

@@ -98,7 +98,7 @@ public abstract class BaseListViewPicFragment<T extends Result> extends BaseNetR
     @Override
     public void onResponse(final Response response, final T result) {
         final PictureResult pictureResult = ((PictureResult) result);
-        for (SinglePicture singlePicture : pictureResult.getResults()) {
+        for (SinglePicture singlePicture : pictureResult.transfor()) {
             mPictures.remove(singlePicture);
         }
         getActivity().runOnUiThread(new Runnable() {
@@ -107,9 +107,9 @@ public abstract class BaseListViewPicFragment<T extends Result> extends BaseNetR
                 if (result instanceof PictureResult) {
                     Boolean isFirstPage  = (Boolean) response.request().tag();
                     if (isFirstPage) {
-                        mPictures.addAll(0, pictureResult.getResults());
+                        mPictures.addAll(0, pictureResult.transfor());
                     } else {
-                        mPictures.addAll(pictureResult.getResults());
+                        mPictures.addAll(pictureResult.transfor());
                     }
                     mAdapter.notifyDataSetChanged();
                 }

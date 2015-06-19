@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by liuyulong@yixin.im on 2015/5/6.
  */
-public class Comment implements Serializable, Cacheable {
+public class Comment implements Serializable, Cacheable<String> {
 
     protected String comment_ID;
     protected String comment_post_ID;
@@ -29,6 +29,8 @@ public class Comment implements Serializable, Cacheable {
     protected String vote_positive;
     protected String vote_negative;
     protected String text_content;
+
+    private String baseKey;
 
     public String getComment_karma() {
         return comment_karma;
@@ -183,6 +185,16 @@ public class Comment implements Serializable, Cacheable {
     }
 
     @Override
+    public void setBaseKey(String key) {
+        this.baseKey = key;
+    }
+
+    @Override
+    public String getBaseKey() {
+        return baseKey;
+    }
+
+    @Override
     public String toString() {
         return "Comment{" +
                 "comment_ID='" + comment_ID + '\'' +
@@ -206,4 +218,5 @@ public class Comment implements Serializable, Cacheable {
                 ", text_content='" + text_content + '\'' +
                 '}';
     }
+
 }

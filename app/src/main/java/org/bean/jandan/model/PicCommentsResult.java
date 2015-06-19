@@ -16,7 +16,7 @@ public class PicCommentsResult extends Result<PicComment> {
     private List<PicComment> mResults;
 
     @Override
-    public List<PicComment> getResults() {
+    public List<PicComment> transfor() {
         return mResults;
     }
 

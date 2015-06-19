@@ -5,11 +5,23 @@ import org.bean.jandan.common.cache.Cacheable;
 /**
  * Created by liuyulong@yixin.im on 2015/5/14.
  */
-public class PicComment implements Cacheable {
+public class PicComment implements Cacheable<String> {
 
     String message;
     String created_at;
     Author author;
+
+    private String baseKey;
+
+    @Override
+    public void setBaseKey(String key) {
+        this.baseKey = key;
+    }
+
+    @Override
+    public String getBaseKey() {
+        return baseKey;
+    }
 
     public String getMessage() {
         return message;
