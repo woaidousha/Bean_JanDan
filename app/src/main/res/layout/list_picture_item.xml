@@ -2,52 +2,31 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="0dp"
     android:orientation="vertical"
-    app:cardCornerRadius="1dp"
-    app:contentPadding="@dimen/card_view_content_padding">
+    app:cardCornerRadius="@dimen/card_view_corner_radius"
+    app:contentPadding="@dimen/card_view_content_padding"
+    tools:ignore="RtlCompat">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/content_view_default_background"
         android:gravity="center"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_title_layout_height"
-            android:padding="@dimen/list_title_layout_padding">
-
-            <TextView
-                android:id="@+id/author"
-                style="@style/Base.TextAppearance.AppCompat.Body1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"/>
-
-            <TextView
-                android:id="@+id/date"
-                style="@style/Base.TextAppearance.AppCompat.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/author"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/list_item_widget_margin"
-                android:layout_toRightOf="@id/author"
-                android:gravity="center_vertical"/>
-
-        </RelativeLayout>
+        <include layout="@layout/list_title_layout"/>
 
         <TextView
             android:id="@+id/comment_content"
             style="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|left"/>
+            android:gravity="center_vertical|start"
+            android:padding="@dimen/list_content_padding"
+            android:text="@string/abc_action_bar_home_description"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,8 +37,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@color/content_view_default_background"
-                android:maxHeight="@dimen/list_pic_max_height"
                 android:minHeight="@dimen/list_pic_min_height"
                 app:actualImageScaleType="centerInside"
                 app:viewAspectRatio="1"/>
@@ -75,29 +52,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_weight="1"
                     android:divider="@drawable/vote_layout_divider_shape"
-                    android:showDividers="middle"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
 
                     <TextView
                         android:id="@+id/oo"
                         style="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:drawableLeft="@drawable/ic_vote_oo"
-                        android:textColor="@color/vote_text_color"
-                        android:gravity="center"/>
+                        android:drawableStart="@drawable/ic_vote_oo"
+                        android:gravity="center"
+                        android:textColor="@color/vote_text_color"/>
 
                     <TextView
                         android:id="@+id/xx"
                         style="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:drawableLeft="@drawable/ic_vote_xx"
-                        android:textColor="@color/vote_text_color"
-                        android:gravity="center"/>
+                        android:drawableStart="@drawable/ic_vote_xx"
+                        android:gravity="center"
+                        android:textColor="@color/vote_text_color"/>
                 </LinearLayout>
 
                 <ImageView

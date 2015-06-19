@@ -12,4 +12,11 @@
         <item name="spinBars">true</item>
         <item name="color">#FFFFFF</item>
     </style>
+
+    <style name="AppTheme.ListTitle">
+        <item name="android:background">@color/title_layout_background</item>
+        <item name="android:padding">@dimen/list_title_layout_padding</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_title_layout_height</item>
+    </style>
 </resources>

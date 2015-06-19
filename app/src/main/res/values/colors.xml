@@ -8,6 +8,8 @@
     <color name="loading_draw_color">#fffdf237</color>
     <color name="content_view_default_background">#55999999</color>
 
+    <color name="title_layout_background">#FFFFFF</color>
+
     <color name="rainbow_red">#bf0c43</color>
     <color name="rainbow_yellow">#f9ba15</color>
     <color name="rainbow_green">#8eac00</color>
