@@ -30,8 +30,8 @@
             android:label="@string/app_name"
             android:launchMode="singleTask">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
         <activity
@@ -57,6 +57,10 @@
             android:name=".activity.AboutActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/action_about"/>
+
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:configChanges="orientation|keyboardHidden"/>
     </application>
 
 </manifest>

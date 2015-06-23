@@ -68,4 +68,14 @@ public class ShareUtil {
         }, UiThreadImmediateExecutorService.getInstance());
     }
 
+    public static void shareUrl(final String url) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, url);
+        intent.setType("text/plain");
+        String title = BeanApp.getApp()
+                              .getString(R.string.button_text_share);
+        BeanApp.getApp()
+               .startActivity(Intent.createChooser(intent, title)
+                                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
 }

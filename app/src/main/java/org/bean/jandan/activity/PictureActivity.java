@@ -113,7 +113,7 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
             if (SinglePicture.class.isInstance(picture)) {
                 ImageFetchHelper.fetchRecyclerViewImage(draweeView, ((SinglePicture) picture).getPicUri());
             }
-            view.setOnClickListener(PictureActivity.this);
+            draweeView.setOnClickListener(PictureActivity.this);
 
             container.addView(view);
             return view;
