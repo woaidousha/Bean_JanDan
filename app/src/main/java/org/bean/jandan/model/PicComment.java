@@ -1,5 +1,7 @@
 package org.bean.jandan.model;
 
+import android.text.TextUtils;
+
 import org.bean.jandan.common.cache.Cacheable;
 
 /**
@@ -86,4 +88,11 @@ public class PicComment implements Cacheable<String> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        return TextUtils.equals(((PicComment) o).getCreated_at(), getCreated_at());
+    }
 }

@@ -105,12 +105,13 @@ public class PictureActivity extends BaseColorActivity implements View.OnClickLi
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            SimpleDraweeView view = (SimpleDraweeView) LayoutInflater.from(PictureActivity.this)
+            ViewGroup view = (ViewGroup) LayoutInflater.from(PictureActivity.this)
                                                                      .inflate(R.layout.picture_item_layout,
                                                                              container, false);
+            SimpleDraweeView draweeView = (SimpleDraweeView) view.findViewById(R.id.picture);
             Cacheable picture = mPictures.get(position);
             if (SinglePicture.class.isInstance(picture)) {
-                ImageFetchHelper.fetchRecyclerViewImage(view, ((SinglePicture) picture).getPicUri());
+                ImageFetchHelper.fetchRecyclerViewImage(draweeView, ((SinglePicture) picture).getPicUri());
             }
             view.setOnClickListener(PictureActivity.this);
 

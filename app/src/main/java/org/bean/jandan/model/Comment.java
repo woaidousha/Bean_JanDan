@@ -1,5 +1,7 @@
 package org.bean.jandan.model;
 
+import android.text.TextUtils;
+
 import org.bean.jandan.common.cache.Cacheable;
 import org.bean.jandan.common.util.StringUtil;
 
@@ -192,6 +194,14 @@ public class Comment implements Serializable, Cacheable<String> {
     @Override
     public String getBaseKey() {
         return baseKey;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        return TextUtils.equals(((Comment) o).getComment_ID(), getComment_ID());
     }
 
     @Override
